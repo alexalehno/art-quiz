@@ -41,7 +41,7 @@ const Score = {
       </header>
 
       <main class="score container">
-        <h1 class="score__title">Score</h1>
+        <h1 class="score__title">Score Page</h1>
       </main>
 
       ${Footer.render()}
