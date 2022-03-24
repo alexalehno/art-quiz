@@ -1,0 +1,43 @@
+@use '../general/vars';
+
+.question-artist {
+  &__header {
+    @include vars.space-between_center;
+  }
+
+  &__img-block {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0 0 20px;
+    box-sizing: border-box;
+
+    height: 295px;
+    margin-top: 30px;
+    margin-bottom: 25px;
+    border-radius: 20px;
+    background-image: url('../images/other/img.jpg');
+    background-size: cover;
+    background-position: 50% 50%;
+  }
+
+  &__options {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  &__option {
+    @include vars.flex_center;
+    
+    width: 48%;
+    height: 48px;
+    margin-bottom: 10px;
+    border: 1px solid white;
+    border-radius: 56px;
+    color: white;
+    font-size: 16px;
+    letter-spacing: -0.9px;
+    background-color: transparent;
+  }
+}

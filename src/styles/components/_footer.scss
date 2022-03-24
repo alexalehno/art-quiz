@@ -1,0 +1,16 @@
+@use '../general/vars';
+
+.footer {
+  @include vars.space-between_center;
+  
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.62766px;
+
+  &__dev-name {
+    color: white;
+    text-decoration: none;
+  }
+}

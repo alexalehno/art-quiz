@@ -1,0 +1,8 @@
+@use '../general/vars';
+
+.set-btn {
+  @include vars.flex_center;
+
+  width: 34px;
+  height: 34px;
+}

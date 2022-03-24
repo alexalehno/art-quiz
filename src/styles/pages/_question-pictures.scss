@@ -1,0 +1,40 @@
+@use '../general/vars';
+
+.question-pictures {
+  &__header {
+    @include vars.space-between_center;
+  }
+
+  &__options {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    margin-bottom: 15px;
+  }
+
+  &__option {
+    width: 48%;
+    height: 163px;
+    margin-bottom: 15px;
+    border-radius: 20px;
+    background-size: cover;
+    background-position: 50% 50%;
+
+    &--one {
+      background-image: url('../images/other/1.jpg');
+    }
+
+    &--two {
+      background-image: url('../images/other/2.jpg');
+    }
+
+    &--three {
+      background-image: url('../images/other/3.jpg');
+    }
+
+    &--four {
+      background-image: url('../images/other/4.jpg');
+    }
+  }
+}

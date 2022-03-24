@@ -1,0 +1,78 @@
+@use '../general/vars';
+
+.category {
+  &__title {
+    margin-bottom: 50px;
+    font-weight: normal;
+  }
+
+  &__list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 0;
+  }
+}
+
+.category-item {
+  position: relative;
+  max-width: 195px;
+  width: 47%;
+  margin: 3px 3px 20px;
+  list-style: none;
+  font-size: 16px;
+  letter-spacing: -0.5px;
+
+  // .......................................
+  &:nth-child(odd):hover {
+    transform: rotate(15deg);
+  }
+
+  &:nth-child(even):hover {
+    transform: rotate(-15deg);
+  }
+  // .......................................
+
+  &__link {
+    display: block;
+    text-decoration: none;
+    color: white;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__title {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: normal;
+  }
+
+  &__img {
+    width: 100%;
+    border-radius: 20px;
+  }
+
+  &__play-again {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    padding: 14px 0;
+    border-radius: 0 0 20px 20px;
+    font-size: 16px;
+    letter-spacing: -0.62766px;
+    color: black;
+    background-color: #FFBCA2;
+
+    &::before {
+      content: url('../images/icon/category/4_play-again.svg');
+      margin-left: 25px;
+      margin-right: 10px;
+      vertical-align: top;
+    }
+  }
+}

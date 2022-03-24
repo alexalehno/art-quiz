@@ -1,0 +1,42 @@
+@use '../general/vars';
+
+.main-page {
+  background-image: url('../images/image/main/bg.jpg');
+  background-size: cover;
+  background-position: center 0%;
+  background-repeat: no-repeat;
+
+  &__header {
+    justify-content: flex-end;
+    flex-grow: 0.7;
+  }
+}
+
+.main {
+  text-align: center;
+
+  &__logo {
+    margin-bottom: 30px;
+  }
+
+  &__question {
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  &__question-btn {
+    @include vars.flex_center;
+
+    width: 268px;
+    height: 56px;
+    border: 1px solid white;
+    border-radius: 56px;
+    color: inherit;
+    font-size: 24px;
+    text-decoration: none;
+
+    &:first-child {
+      margin-bottom: 20px;
+    }
+  }
+}

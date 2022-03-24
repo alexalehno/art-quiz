@@ -1,0 +1,17 @@
+@use 'general/fonts';
+@use 'general/general';
+
+@use 'components/set-btn';
+@use 'components/time-indicator';
+@use 'components/questions-indicator';
+@use 'components/footer';
+
+@use 'pages/error-page';
+@use 'pages/main-page';
+@use 'pages/settings-page';
+@use 'pages/categories-page';
+@use 'pages/score-page';
+@use 'pages/question-artist';
+@use 'pages/question-pictures';
+
+@use 'general/media-query';

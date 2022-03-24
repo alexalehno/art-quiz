@@ -1,0 +1,138 @@
+@use 'vars';
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(59, 28, 77);
+}
+
+body::-webkit-scrollbar {
+  width: 12px;
+  background-color: rgb(194, 194, 194);
+}
+
+body::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: linear-gradient(180deg, #bd0101, #5e0000);
+}
+
+button {
+  cursor: pointer;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 1440px;
+  min-height: 640px;
+  padding-top: 22px;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+  font-family: "Gilroy-Regular";
+  color: white;
+  background-color: black;
+  box-shadow: 0px 0px 100px 0px rgb(255 0 0);
+  overflow: hidden;
+}
+
+.container {
+  width: 100%;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.nav {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 9;
+  width: 100%;
+  border: 1px solid white;
+  border-radius: 20px 20px 0px 0px;
+  background-color: black;
+  font-size: 12px;
+  letter-spacing: -0.5px;
+
+  &__list {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__link {
+    text-decoration: none;
+    text-align: center;
+    color: white;
+
+    &--active {
+      color: #FFBCA2;
+      font-weight: 700;
+
+      .nav__icon {
+        filter: sepia(41%) saturate(3675%) hue-rotate(295deg) brightness(102%) contrast(101%);
+      }
+    }
+  }
+
+  &__icon {
+    display: block;
+    height: 24px;
+    margin: 0 auto 10px;
+  }
+}
+
+.question-container {
+  max-width: 825px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.question-title {
+  margin: 0;
+  font-size: 22px;
+  letter-spacing: -0.5px;
+}
+
+.hover-opacity {
+  transition: vars.$transition;
+
+  &:hover {
+    opacity: vars.$opacity;
+  }
+}
+
+.hover-bg {
+  transition: vars.$transition;
+
+  &:hover {
+    background-color: white;
+    color: black;
+  }
+
+  &:active {
+    border-color: #FFBCA2;
+    background-color: #FFBCA2;
+    color: black;
+  }
+}
+
+.hover-rotate {
+  transition: vars.$transition;
+
+  &:hover {
+    transform: rotate(-360deg);
+  }
+}
