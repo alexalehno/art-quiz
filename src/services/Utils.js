@@ -4,13 +4,10 @@ const Utils = {
     let url = location.hash.slice(1).toLowerCase() || '/';
     let r = url.split("/");
 
-    let request = {
-      resource: null,
-      category: null,
-    }
+    let request = {}
 
     request.resource = r[1];
-    request.category = r[2];
+    isFinite(r[2]) ? request.catNum = r[2] : request.score = r[2];
 
     return request;
   }

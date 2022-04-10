@@ -1,5 +1,5 @@
 import Footer from '../components/Footer.js';
-import SettingBtn from '../components/Setting-btn.js';
+import SettingBtn from '../components/header/SettingBtn.js';
 import mainLogo from '../../images/icon/main/logo-main.svg';
 
 const Main = {
@@ -8,7 +8,7 @@ const Main = {
     return `
     <div class="main-page page">
       <header class="main-page__header header container">
-        ${SettingBtn.render('/')}
+        ${SettingBtn.render('')}
       </header>
 
       <main class="main container">

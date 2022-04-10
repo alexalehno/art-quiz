@@ -1,0 +1,213 @@
+@use '../general/vars';
+
+// ....................question.......................
+
+.question-result {
+  max-width: 520px;
+  padding: 30px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  color: #010101;
+  text-align: center;
+  font-family: "Gilroy-Regular";
+  background-color: white;
+
+  &__img {
+    display: flex;
+    width: 462px;
+    height: 416px;
+    border-radius: 20px;
+    background-color: red;
+    background-position: center;
+    background-size: cover;
+  }
+
+  &__indicator {
+    align-self: flex-end;
+    width: 60px;
+    height: 60px;
+    margin: 30px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+
+  &__title {
+    margin-bottom: 10px;
+    font-size: 32px;
+  }
+
+  &__author,
+  &__year {
+    display: inline-block;
+    margin-bottom: 35px;
+    font-size: 22px;
+    font-style: italic;
+  }
+
+  &__btn {
+    @include vars.flex_center;
+
+    max-width: 400px;
+    width: 100%;
+    height: 62px;
+    margin: 0 auto;
+    border: none;
+    border-radius: 56px;
+    font-size: 22px;
+    background-color: #FFBCA2;
+  }
+}
+
+// ....................category.......................
+
+.category-result {
+  // .............Category result...............
+
+  width: 522px;
+  padding: 40px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  font-family: 'Gilroy-Regular';
+  text-align: center;
+  color: #010101;
+  background-color: white;
+
+  &__title {
+    margin: 30px 0;
+    font-weight: 600;
+    font-size: 42px;
+  }
+
+  &__num-wrap {
+    margin-top: 40px;
+    margin-bottom: 65px;
+
+    font-family: 'Gilroy-Bold';
+    font-weight: 700;
+    font-size: 82px;
+  }
+
+  &__btn-wrap {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__btn {
+    @include vars.flex_center;
+    width: 210px;
+    height: 62px;
+    border: 1px solid;
+    border-radius: 60px;
+    font-size: 22px;
+    text-decoration: none;
+    color: inherit;
+    background-color: white;
+
+    &:last-child {
+      border: none;
+      background-color: #FFBCA2;
+    }
+  }
+
+  // .............Grand result...............
+
+  &__img-grand {
+    margin-bottom: 30px;
+  }
+
+  &__subtitle-grand {
+    display: block;
+    margin-bottom: 40px;
+    font-family: 'Gilroy-Bold';
+    font-size: 77px;
+    line-height: 78px;
+  }
+
+  &__title-grand {
+    margin-top: 0;
+    margin-bottom: 60px;
+    font-size: 42px;
+  }
+
+  &__btn-grand {
+    @include vars.flex_center;
+    width: 400px;
+    height: 62px;
+    margin: 0 auto;
+    border-radius: 60px;
+    font-size: 22px;
+    text-decoration: none;
+    color: inherit;
+    background-color: #FFBCA2;
+  }
+
+  // .............Game over...............
+
+  &__img-over {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  &__title-over {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-family: 'Gilroy-Bold';
+    font-size: 62px;
+  }
+
+  &__subtitle-over {
+    display: block;
+    margin-bottom: 60px;
+    font-size: 42px;
+  }
+}
+
+// ....................quit game.......................
+
+.quit-game {
+  width: 580px;
+  padding: 30px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  font-family: 'Gilroy-Regular';
+  text-align: center;
+  color: #010101;
+  background-color: white;
+
+  &__img {
+    margin-left: auto;
+    filter: invert(38%) sepia(17%) saturate(0%) hue-rotate(215deg) brightness(96%) contrast(82%);
+  }
+
+  &__title {
+    width: 340px;
+    margin: 45px auto 65px;
+    font-size: 32px;
+    line-height: 36px;
+    letter-spacing: -0.5px;
+  }
+
+  &__btn-wrap {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__btn {
+    @include vars.flex_center;
+    width: 250px;
+    height: 62px;
+    border: 1px solid;
+    border-radius: 60px;
+    font-size: 22px;
+    text-decoration: none;
+    color: inherit;
+    background-color: white;
+
+    &:last-child {
+      border: none;
+      background-color: #FFBCA2;
+    }
+  }
+}

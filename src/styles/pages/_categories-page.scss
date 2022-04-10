@@ -22,6 +22,11 @@
   list-style: none;
   font-size: 16px;
   letter-spacing: -0.5px;
+  transition: vars.$transition;
+
+  &:hover &__play-again {
+    opacity: 1;
+  }
 
   // .......................................
   &:nth-child(odd):hover {
@@ -31,6 +36,7 @@
   &:nth-child(even):hover {
     transform: rotate(-15deg);
   }
+
   // .......................................
 
   &__link {
@@ -50,6 +56,10 @@
     font-weight: normal;
   }
 
+  &__amount {
+    color: #FFBCA2;
+  }
+
   &__img {
     width: 100%;
     border-radius: 20px;
@@ -58,7 +68,7 @@
   &__play-again {
     position: absolute;
     left: 0;
-    bottom: 0;
+    bottom: 4px;
     display: block;
     width: 100%;
     padding: 14px 0;
@@ -67,9 +77,11 @@
     letter-spacing: -0.62766px;
     color: black;
     background-color: #FFBCA2;
+    opacity: 0;
+    transition: vars.$transition;
 
     &::before {
-      content: url('../images/icon/category/4_play-again.svg');
+      content: url('../images/icon/category/play-again.svg');
       margin-left: 25px;
       margin-right: 10px;
       vertical-align: top;

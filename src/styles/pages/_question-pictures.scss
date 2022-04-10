@@ -11,6 +11,11 @@
     flex-wrap: wrap;
     margin-top: 40px;
     margin-bottom: 15px;
+
+    // .............
+    font-size: 28px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
   }
 
   &__option {
@@ -18,23 +23,15 @@
     height: 163px;
     margin-bottom: 15px;
     border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
     background-size: cover;
     background-position: 50% 50%;
+    cursor: pointer;
 
-    &--one {
-      background-image: url('../images/other/1.jpg');
-    }
+   transition: opacity vars.$transition, background-image  1s ease-in-out 0s;
+  }
 
-    &--two {
-      background-image: url('../images/other/2.jpg');
-    }
-
-    &--three {
-      background-image: url('../images/other/3.jpg');
-    }
-
-    &--four {
-      background-image: url('../images/other/4.jpg');
-    }
+  &__option:hover {
+    opacity: 0.5;
   }
 }

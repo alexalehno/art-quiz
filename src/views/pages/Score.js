@@ -1,47 +1,50 @@
 import Footer from '../components/Footer.js';
-import SettingBtn from '../components/Setting-btn.js';
-import { navIcons } from '../../modules/global.js';
-import { obj } from '../../modules/global.js';
+import SettingBtn from '../components/header/SettingBtn.js';
+import Logo from '../components/header/Logo.js';
+import Nav from '../components/header/Nav.js';
+
+import ScoreItem from '../components/ScoreItem';
+
+
+function createItem() {
+  let str = '';
+
+  for (let i = 0; i < 10; i++) {
+    str += ScoreItem.render();
+  }
+  return str;
+}
+
 
 const Score = {
-  render(url) {
+  render(request) {
+
+    let type = request.resource.split('_')[1];
+
     return `
     <div class="score-page page">
       <header class="header container">
-        <a class="header__logo" href="/#/">
-          <img class="header__logo-img" src="${navIcons[3]}" alt="logo-category">
-        </a>
-
-        <nav class="nav">
-          <ul class="nav__list">
-            <li class="nav__item">
-              <a class="nav__link hover-opacity" href="/#/">
-                <img class="nav__icon" src="${navIcons[0]}" alt="nav-icon">
-                Home
-              </a>
-            </li>
-            
-            <li class="nav__item">
-              <a class="nav__link hover-opacity" href="/#/${obj.questionType}">
-                <img class="nav__icon" src="${navIcons[1]}" alt="nav-icon">
-                Categories
-              </a>
-            </li>
-            
-            <li class="nav__item">
-              <a class="nav__link nav__link--active" href="/#/score">
-                <img class="nav__icon" src="${navIcons[2]}" alt="nav-icon">
-                Score
-              </a>
-            </li>
-          </ul>
-        </nav>
-
-        ${SettingBtn.render(`/${url.resource}`)}
+        ${Logo.render()}
+        ${Nav.render(request, ['hover-opacity', 'nav__link--active'])}
+        ${SettingBtn.render(`${request.resource}/${request.score}`)}
       </header>
 
       <main class="score container">
-        <h1 class="score__title">Score Page</h1>
+        <h2 class="score__title">${type} quiz</h2>
+        <div class="score-content">
+          <p class="score__sub-title">Score Page</p>
+          <ul class="score__list">${createItem()}</ul>
+        </div>
+
+        <div class="score-btns score-btns--margin"> 
+          <button class="score-btns__btn hover-opacity" data-sign="0"></button>
+          <div class="score-btns__nums">
+            <span class="score-btns__num">0</span>
+            /
+            <span class="score-btns__num">0</span>
+          </div>
+          <button class="score-btns__btn hover-opacity" data-sign="1"></button>
+        </div>
       </main>
 
       ${Footer.render()}

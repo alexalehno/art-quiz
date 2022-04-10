@@ -158,6 +158,7 @@
     color: white;
     font-size: 24px;
     background-color: transparent;
+    outline: none;
     -moz-appearance: textfield;
 
     &::-webkit-outer-spin-button,
@@ -176,7 +177,7 @@
 
   &__btn {
     @include vars.flex_center;
-    
+
     max-width: 156px;
     width: 100%;
     height: 56px;

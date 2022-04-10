@@ -1,9 +1,9 @@
 import Footer from '../components/Footer.js';
-import CloseBtn from '../components/Close-btn';
+import CloseBtn from '../components/header/CloseBtn';
 
 import muteBtn from '../../images/icon/setting/mute.svg';
 import soundBtn from '../../images/icon/setting/sound.svg';
-import {obj} from '../../modules/global.js';
+import { storage } from '../../app.js';
 
 const Settings = {
   render() {
@@ -12,7 +12,7 @@ const Settings = {
       <header class="settings-page__header header container">
         <h2 class="settings-page__header-title">Settings</h2>
 
-        ${CloseBtn.render(obj.btnPath)}
+        ${CloseBtn.render(storage.btnPath, '')}
       </header>
       
       <main class="settings container">
@@ -41,7 +41,7 @@ const Settings = {
             <h3 class="settings__title">Time to answer</h3>
             <div class="settings__answer-btn-wrap">
               <button class="settings__answer-btn hover-opacity">&ndash;</button>
-              <input class="settings__answer-input" type="number" value="20">
+              <input class="settings__answer-input" type="number" value="20" readonly>
               <button class="settings__answer-btn hover-opacity">+</button>
             </div>
           </div>

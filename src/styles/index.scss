@@ -1,9 +1,13 @@
 @use 'general/fonts';
+
+@use 'components/results-windows';
+
 @use 'general/general';
 
 @use 'components/set-btn';
 @use 'components/time-indicator';
 @use 'components/questions-indicator';
+@use 'components/nav';
 @use 'components/footer';
 
 @use 'pages/error-page';

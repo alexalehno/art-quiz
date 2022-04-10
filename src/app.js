@@ -1,41 +1,106 @@
 import scss from './styles/index.scss';
 import html from './index.html';
-
+// ...............................................................................
 import Main from './views/pages/Main.js';
 import Settings from './views/pages/Settings.js';
 import Categories from './views/pages/Categories.js';
-import QuestionArtist from './views/pages/Question-artist.js';
-import QuestionPictures from './views/pages/Question-pictures.js';
+import QuestionArtist from './views/pages/QuestionArtist.js';
+import QuestionPictures from './views/pages/QuestionPictures.js';
 import Error404 from './views/pages/Error404.js';
 import Score from './views/pages/Score.js';
-
 import Utils from './services/Utils.js';
+// ...............................................................................
+import QuestionM from './services/QuestionM.js';
+import QuestionView from './services/QuestionView.js';
+import QuestionC from './services/QuestionC.js';
+
+import GameM from './services/GameM.js';
+import GameView from './services/GameView.js';
+import GameC from './services/GameC.js';
+// ...............................................................................
+import LocalStorage from './services/LocalStorage';
+// ...............................................................................
+// ...............................................................................
+
+export let storage = {
+  btnPath: null,
+  questionType: null,
+  qInfo: null,
+}
 
 const routes = {
   '/': Main,
   '/settings': Settings,
-
   '/categories_artist': Categories,
   '/categories_pictures': Categories,
 
-  '/categories_artist/category': QuestionArtist,
-  '/categories_pictures/category': QuestionPictures,
+  '/categories_artist/cat_num': QuestionArtist,
+  '/categories_pictures/cat_num': QuestionPictures,
 
-  '/score': Score,
+  '/categories_artist/score': Score,
+  '/categories_pictures/score': Score,
 };
 
+const app = document.querySelector('.app');
 
-function router() {
-  const app = null || document.querySelector('.app');
+const localStorage = new LocalStorage();
 
-  let request = Utils.parseRequestURL();
+const gameM = new GameM();
+const gameView = new GameView();
+const gameC = new GameC();
 
-  let parsedURL = (request.resource ? '/' + request.resource : '/') + (request.category ? '/category' : '');
+const questionView = new QuestionView();
+const questionC = new QuestionC();
 
-  let page = routes[parsedURL] ? routes[parsedURL] : Error404;
-  app.innerHTML = page.render(request);
+storage.qInfo = gameM.qInfo;
+
+async function start() {
+  await gameM.getData();
+
+  function router() {
+    let request = Utils.parseRequestURL();
+    let parsedURL = (request.resource ? '/' + request.resource : '/') + (request.catNum ? '/cat_num' : '') + (request.score ? '/score' : '');
+    let page = routes[parsedURL] ? routes[parsedURL] : Error404;
+    app.innerHTML = page.render(request);
+    // ...............................................................................
+    // ...............................................................................
+
+    if (request.score) {
+      gameM.start(gameView, request.resource);
+      gameView.start(gameM, app);
+      gameM.updateView();
+      gameC.start(gameM, app);
+    }
+
+    // .............
+    if (parsedURL === '/categories_artist' || parsedURL === '/categories_pictures') {
+      gameM.start(gameView, request.resource);
+      gameView.start(gameM, app);
+      gameM.updateView();
+    }
+
+    // .............
+    if (request.catNum) {
+      const questionM = new QuestionM(gameM.data, request.resource, request.catNum - 1);
+      questionM.start(questionView, gameM.qInfo);
+      questionView.start(questionM, app);
+      questionM.createOptions();
+      questionC.start(questionM, app);
+    }
+  }
+
+  router();
+  window.addEventListener('hashchange', router);
 }
 
-window.addEventListener('hashchange', router);
-window.addEventListener('load', router);
- 
+
+window.addEventListener('load', () => {
+  storage = localStorage.getData('storage') || storage;
+  gameM.qInfo = storage.qInfo;
+  start();
+});
+
+window.addEventListener('beforeunload', () => {
+  localStorage.setData('storage', storage);
+});
+
