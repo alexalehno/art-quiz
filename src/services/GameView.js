@@ -14,70 +14,66 @@ class GameView {
     this.scoreItems = this.gField.querySelectorAll('.score__item');
   }
 
+
   update() {
-    if (this.categoryItems.length) {
-      this.categoryCard()
-    }
-
-    // ..................score item.............................................
-
     let data = this.gModel.data;
     let count = this.gModel.count;
     let catType = this.gModel.catType;
-    let infoArr = this.gModel.pages;
+    let pages = this.gModel.pages;
 
 
-    if (this.scoreItems.length && infoArr.length) {
-      document.querySelector('.score__sub-title').classList.add('none');
+    // ..................category item.............................................
+    if (this.categoryItems.length) {
+      this.categoryCard(pages);
+    }
 
-      this.scoreItems.forEach((item, i) => {
-        item.classList.remove('none');
-        item.classList.remove('gray');
-
-        if (!infoArr[count].questns[i]) {
-          item.classList.add('gray');
-        }
-
-        // ...........................................
-        setInfo(catType, count, infoArr, this.getImg);
-
-        function setInfo(type, count, info, func) {
-          const inner = item.querySelectorAll('.score__item-title, .score__item-bg, .score__item-name, .score__item-artist, .score__item-year');
-          let c = type === 'categories_artist' ? c = i : c = i + 120;
-          let num = info[count].num * 10 + c;
-
-          inner[0].textContent = `Cat-${info[count].num + 1}`;
-          inner[2].textContent = data[num].name;
-          inner[3].textContent = data[num].author;
-          inner[4].textContent = data[num].year;
-          func(data[num].imageNum, inner[1]);
-        }
-      })
-
-
-      // .....................показать информацию score item.......................
-      if (this.gModel.isItemShown) {
-        const scoreItem = this.gModel.scoreItem.querySelector('.score__item-content');
-        scoreItem.classList.toggle('score__item-content--show');
-      }
-      // ....................номера страниц..........................
-      const numPages = this.gField.querySelectorAll('.score-btns__num');
-
-      numPages[0].textContent = this.gModel.pagesLength ? this.gModel.numPage : this.gModel.pagesLength;
-      numPages[1].textContent = this.gModel.pagesLength;
-      // .........................................................
+    // ..................score item.............................................
+    if (this.scoreItems.length && pages.length) {
+      this.scoreCard(data, count, catType, pages);
     }
   }
 
-  categoryCard() {
-    this.gModel.qInfo.forEach(item => {
-      if (this.gModel.catType === item.type) {
-        let catItemNums = this.categoryItems[item.num].querySelectorAll('.category-item__num');
-        catItemNums[0].textContent = item.ready;
-        catItemNums[1].textContent = item.total;
+  scoreCard(data, count, catType, pages) {
+    document.querySelector('.score__sub-title').classList.add('none');
 
-        this.categoryItems[item.num].classList.remove('not-played');
+    this.scoreItems.forEach((item, i) => {
+      item.classList.remove('none');
+      item.classList.remove('gray');
+      if (!pages[count].questns[i]) item.classList.add('gray');
+      setInfo(catType, count, pages, this.getImg);
+
+      
+      function setInfo(type, count, info, func) {
+        const inner = item.querySelectorAll('.score__item-title, .score__item-bg, .score__item-name, .score__item-artist, .score__item-year');
+        let c = type === 'categories_artist' ? c = i : c = i + 120;
+        let num = info[count].num * 10 + c;
+
+        inner[0].textContent = `Cat-${info[count].num + 1}`;
+        inner[2].textContent = data[num].name;
+        inner[3].textContent = data[num].author;
+        inner[4].textContent = data[num].year;
+        func(data[num].imageNum, inner[1]);
       }
+    })
+
+    // ............................................................
+    // ....................номера страниц..........................
+    const numPages = this.gField.querySelectorAll('.score-btns__num');
+    numPages[0].textContent = count + 1;
+    numPages[1].textContent = pages.length;
+    // .....................показать информацию score item.......................
+    if (this.gModel.isItemShown) {
+      const scoreItem = this.gModel.scoreItem.querySelector('.score__item-content');
+      scoreItem.classList.toggle('score__item-content--show');
+    }
+  }
+
+  categoryCard(pages) {
+    pages.forEach(item => {
+      let catItemNums = this.categoryItems[item.num].querySelectorAll('.category-item__num');
+      this.categoryItems[item.num].classList.remove('not-played');
+      catItemNums[0].textContent = item.ready;
+      catItemNums[1].textContent = item.total;
     })
   }
 

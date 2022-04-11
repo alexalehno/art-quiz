@@ -1,6 +1,10 @@
 import iconRight from '../images/icon/question/icon-right.svg';
 import iconWrong from '../images/icon/question/icon-wrong.svg';
 
+import soundRight from '../audio/right.mp3';
+import soundWrong from '../audio/wrong.mp3';
+import soundRound from '../audio/round.mp3';
+
 class QuestionView {
   qModel = null;
   qField = null;
@@ -46,24 +50,26 @@ class QuestionView {
       // .................
       (this.qModel.type === 'categories_artist') ? this.grayDiv = this.questnEl : this.grayDiv = this.options;
       this.grayDiv.classList.add('gray');
+      // .................
 
     } else {
-      if (this.grayDiv) this.grayDiv.classList.remove('gray');
       this.questnResult[0].classList.add('hidden');
+      if (this.grayDiv) this.grayDiv.classList.remove('gray');
     }
 
-    function showRes(model, arrEl, func) {
+    function showRes(model, arrEl, func) {  // <= ????????????????????????????
       func(model.current, arrEl[1]);
+
       arrEl[3].textContent = model.data[model.current].name;
       arrEl[4].textContent = model.data[model.current].author;
       arrEl[5].textContent = model.data[model.current].year;
 
-      if (model.isRightAnswer) {
-        arrEl[2].style.backgroundImage = `url(${iconRight})`;
+      let icon = model.isRightAnswer ? iconRight : iconWrong;
+      arrEl[2].style.backgroundImage = `url(${icon})`;
 
-      } else {
-        arrEl[2].style.backgroundImage = `url(${iconWrong})`;
-      }
+      let sound = model.isRightAnswer ? soundRight : soundWrong;
+      model.audio.src = sound;
+      model.audio.play();
     }
   }
 
@@ -75,6 +81,8 @@ class QuestionView {
       }
 
       this.catResultArr[this.qModel.catResBlock].classList.remove('hidden');
+      this.qModel.audio.src = soundRound;
+      this.qModel.audio.play();
 
     } else {
       this.catResultArr[this.qModel.catResBlock].classList.add('hidden');

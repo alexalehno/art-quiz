@@ -81,6 +81,14 @@ module.exports = {
       },
 
       {
+        test: /\.mp3$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/audio/[hash][ext]'
+        },
+      },
+
+      {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: 'asset/resource',
         generator: {
@@ -98,7 +106,7 @@ module.exports = {
             plugins: ['@babel/plugin-transform-runtime']
           }
         }
-      }
+      },
     ],
   },
 } 

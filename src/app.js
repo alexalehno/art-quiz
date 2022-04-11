@@ -22,6 +22,7 @@ import LocalStorage from './services/LocalStorage';
 // ...............................................................................
 // ...............................................................................
 
+
 export let storage = {
   btnPath: null,
   questionType: null,
@@ -66,14 +67,11 @@ async function start() {
     // ...............................................................................
 
     if (request.score) {
-      gameM.start(gameView, request.resource);
-      gameView.start(gameM, app);
-      gameM.updateView();
       gameC.start(gameM, app);
     }
 
-    // .............
-    if (parsedURL === '/categories_artist' || parsedURL === '/categories_pictures') {
+    //.............
+    if (parsedURL === '/categories_artist' || parsedURL === '/categories_pictures' || request.score) {
       gameM.start(gameView, request.resource);
       gameView.start(gameM, app);
       gameM.updateView();

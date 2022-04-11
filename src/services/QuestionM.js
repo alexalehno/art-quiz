@@ -12,10 +12,13 @@ class QuestionM {
     this.current = (type === 'categories_artist') ? num *= 10 : (num *= 10) + 120;
     this.last = this.current + 10;
     this.type = type;
-   
+
     this.catResBlock = 0;
     this.numTrueAnsw = null;
     this.quit = false;
+
+    // ...................
+    this.audio = new Audio();
   }
 
   qView = null;
