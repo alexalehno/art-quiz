@@ -129,10 +129,8 @@ button {
   @include vars.flex_center;
 
   background-color: rgba(0, 0, 0, 0.6);
-  // transition: calc(vars.$transition * 1.2);
-
-  // transition-delay: 0.3s;
-  // transition-timing-function: cubic-bezier(1, 1.65, .05, -1.2);
+  transition: calc(vars.$transition * 1.2);
+  transition-delay: 0.2s;
 }
 
 // ...........
@@ -144,3 +142,5 @@ button {
 .none {
   display: none;
 }
+
+

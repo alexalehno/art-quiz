@@ -27,6 +27,7 @@ export let storage = {
   btnPath: null,
   questionType: null,
   qInfo: null,
+  set: null,
 }
 
 const routes = {
@@ -54,6 +55,7 @@ const questionView = new QuestionView();
 const questionC = new QuestionC();
 
 storage.qInfo = gameM.qInfo;
+storage.set = gameM.settings.set;
 
 async function start() {
   await gameM.getData();
@@ -66,21 +68,21 @@ async function start() {
     // ...............................................................................
     // ...............................................................................
 
+    gameM.start(gameView, request.resource);
+    gameView.start(gameM, app);
+    gameM.updateView();
+
+    if (request.resource === 'settings') {
+      gameC.settings(gameM, app);
+    }
+
     if (request.score) {
       gameC.start(gameM, app);
     }
 
-    //.............
-    if (parsedURL === '/categories_artist' || parsedURL === '/categories_pictures' || request.score) {
-      gameM.start(gameView, request.resource);
-      gameView.start(gameM, app);
-      gameM.updateView();
-    }
-
-    // .............
     if (request.catNum) {
       const questionM = new QuestionM(gameM.data, request.resource, request.catNum - 1);
-      questionM.start(questionView, gameM.qInfo);
+      questionM.start(questionView, gameM.qInfo, gameM.settings);
       questionView.start(questionM, app);
       questionM.createOptions();
       questionC.start(questionM, app);
@@ -95,6 +97,7 @@ async function start() {
 window.addEventListener('load', () => {
   storage = localStorage.getData('storage') || storage;
   gameM.qInfo = storage.qInfo;
+  gameM.settings.set = storage.set;
   start();
 });
 

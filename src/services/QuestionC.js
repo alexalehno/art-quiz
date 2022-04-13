@@ -1,4 +1,3 @@
-
 class QuestionC {
   qModel = null;
   qField = null;
@@ -10,29 +9,32 @@ class QuestionC {
     let cls = (this.qModel.type === 'categories_artist') ? cls = '.question-artist__options' : cls = '.question-pictures__options';
 
     const options = this.qField.querySelector(cls);
-    options.addEventListener('click', (e) => this.chooseOption(e));
-
-    const quitGame = this.qField.querySelector('.quit-game');
-    quitGame.addEventListener('click', (e) => this.cancel(e));
-
-    const playAgainBtn = this.qField.querySelector('.play-again');
-    playAgainBtn.addEventListener('click', () => this.again());
-
-    const quitBtn = this.qField.querySelector('.quit-btn');
-    quitBtn.addEventListener('click', () => this.quit());
+    options.addEventListener('click', (e) => {
+      if (!this.qModel.isAnswered)
+        this.checkAnswer(e)
+    });
 
     const nextQ = this.qField.querySelector('.question-result__btn');
     nextQ.addEventListener('click', () => {
-      if (this.qModel.isAnswered) this.next();
+      if (this.qModel.isAnswered) this.nextQuestion();
     })
+
+    const quitGameBtn = this.qField.querySelector('.quit-game');
+    quitGameBtn.addEventListener('click', (e) => this.cancelQuit(e));
+
+    const playAgainBtn = this.qField.querySelector('.play-again');
+    playAgainBtn.addEventListener('click', () => this.playAgain());
+
+    const quitBtn = this.qField.querySelector('.quit-btn');
+    quitBtn.addEventListener('click', () => this.quitGame());
   }
 
   // контроллер вызывает только методы модели
-  chooseOption = (e) => this.qModel.checkAnswer(e);
-  cancel = (e) => this.qModel.cancelQuit(e);
-  again = () => this.qModel.playAgain();
-  quit = () => this.qModel.quitGame();
-  next = () => this.qModel.nextQuestion();
+  checkAnswer = (e) => this.qModel.checkAnswer(e);
+  cancelQuit = (e) => this.qModel.cancelQuit(e);
+  playAgain = () => this.qModel.playAgain();
+  quitGame = () => this.qModel.quitGame();
+  nextQuestion = () => this.qModel.nextQuestion();
 }
 
 export default QuestionC;

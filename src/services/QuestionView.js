@@ -1,14 +1,17 @@
 import iconRight from '../images/icon/question/icon-right.svg';
 import iconWrong from '../images/icon/question/icon-wrong.svg';
 
+// ??????????????????????????????????????
 import soundRight from '../audio/right.mp3';
 import soundWrong from '../audio/wrong.mp3';
 import soundRound from '../audio/round.mp3';
+import soundClose from '../audio/close.mp3';
 
 class QuestionView {
   qModel = null;
   qField = null;
 
+  timeIndicator = null;
   questnEl = null;
   options = null;
   qIndicator = null;
@@ -17,6 +20,9 @@ class QuestionView {
   catResNums = null;
   quitBlock = null;
   grayDiv = null;
+
+  timeBlock = null;
+  timeProgress = null;
 
   start(model, field) {
     this.qModel = model;
@@ -32,14 +38,18 @@ class QuestionView {
     this.catResultArr = this.qField.querySelectorAll('.category-overlay');
     this.catResNums = this.qField.querySelectorAll('.category-result__num');
     this.quitBlock = this.qField.querySelector('.quit-overlay');
+    this.timeIndicator = this.qField.querySelector('.time-indicator');
+
+    this.timeBlock = this.qField.querySelector('.time-indicator__time');
+    this.timeProgress = this.qField.querySelector('.time-indicator__progress-inner');
   }
 
   update() {
     this.renderOptions();
     this.renderIndicator();
     this.renderResQuestion();
+    this.renderResCategory();
     this.renderQuitBlock();
-    this.renderResultBlock();
   }
 
   renderResQuestion() {
@@ -67,13 +77,15 @@ class QuestionView {
       let icon = model.isRightAnswer ? iconRight : iconWrong;
       arrEl[2].style.backgroundImage = `url(${icon})`;
 
+      // .............?????????
       let sound = model.isRightAnswer ? soundRight : soundWrong;
       model.audio.src = sound;
-      model.audio.play();
+      setTimeout(() => model.audio.play(), 400);
+      // ........................
     }
   }
 
-  renderResultBlock() {
+  renderResCategory() {
     if (this.qModel.isCatPassed) {
       if (this.qModel.catResBlock === 1) {
         this.catResNums[0].textContent = this.qModel.numTrueAnsw;
@@ -81,8 +93,11 @@ class QuestionView {
       }
 
       this.catResultArr[this.qModel.catResBlock].classList.remove('hidden');
+
+      // .............?????????
       this.qModel.audio.src = soundRound;
       this.qModel.audio.play();
+      // .................
 
     } else {
       this.catResultArr[this.qModel.catResBlock].classList.add('hidden');
@@ -92,6 +107,11 @@ class QuestionView {
   renderQuitBlock() {
     if (this.qModel.quit) {
       this.quitBlock.classList.remove('hidden');
+
+      // .............?????????
+      this.qModel.audio.src = soundClose;
+      setTimeout(() => this.qModel.audio.play(), 400);
+      // .....................
 
     } else {
       this.quitBlock.classList.add('hidden');
@@ -123,6 +143,20 @@ class QuestionView {
 
       this.options.children[i].setAttribute('data-num', item.imageNum);
     })
+
+    // ..............time game................
+    if (this.qModel.settings.set.isTimeGame) {
+      let time = this.qModel.settings.set.timeToAnswer;
+      let timeOut = this.qModel.timeOut;
+
+      this.timeProgress.style.width = `${100 - (timeOut * 100) / time}%`;
+      this.timeBlock.textContent = `0:${timeOut.toString().padStart(2, '0')}`;
+      
+      this.timeIndicator.classList.remove('opacity');
+
+    } else {
+      this.timeIndicator.classList.add('opacity');
+    }
   }
 
   getImg(i, d) {

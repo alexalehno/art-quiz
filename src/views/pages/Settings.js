@@ -19,10 +19,10 @@ const Settings = {
         <div class="settings__content">
           <div class="settings__volume">
             <h3 class="settings__title">Volume</h3>
-            <input class="settings__volume-progress" type="range" value="35">
-            <div class="settings__volume-btn-wrap">
-              <button class="settings__volume-btn hover-opacity"><img src="${muteBtn}" alt="mute-button"></button>
-              <button class="settings__volume-btn hover-opacity"><img src="${soundBtn}" alt="sound-button"></button>
+            <input class="settings__volume-progress" type="range">
+            <div class="settings__volume-img-wrap">
+              <img class="settings__volume-img" src="${muteBtn}" alt="mute">
+              <img class="settings__volume-img" src="${soundBtn}" alt="sound">
             </div>
           </div>
 
@@ -41,7 +41,7 @@ const Settings = {
             <h3 class="settings__title">Time to answer</h3>
             <div class="settings__answer-btn-wrap">
               <button class="settings__answer-btn hover-opacity">&ndash;</button>
-              <input class="settings__answer-input" type="number" value="20" readonly>
+              <input class="settings__answer-input" type="number" readonly>
               <button class="settings__answer-btn hover-opacity">+</button>
             </div>
           </div>

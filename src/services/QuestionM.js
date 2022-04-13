@@ -1,4 +1,3 @@
-
 class QuestionM {
   constructor(data, type, num) {
     this.data = data;
@@ -19,14 +18,24 @@ class QuestionM {
 
     // ...................
     this.audio = new Audio();
+    this.audio.volume = null;
+
+    // ..............
+    this.timeOut = null;
+
+    this.intervalId = null;
+    this.timeoutId = null;
   }
 
   qView = null;
   qInfo = null;
+  settings = null;
 
-  start(view, info) {
+  start(view, info, set) {
     this.qView = view;
     this.qInfo = info;
+    this.settings = set;
+    this.audio.volume = this.settings.set.volume / 100;
   }
 
   updateView() {
@@ -34,6 +43,20 @@ class QuestionM {
       this.qView.update();
     }
   };
+
+  counter(timeOut) {
+    this.intervalId = setInterval(() => {
+      this.timeOut--;
+
+      if (this.timeOut === 0) {
+        this.checkAnswer();
+      }
+
+      this.updateView();
+    }, 1000);
+
+    this.timeoutId = setTimeout(() => clearInterval(this.intervalId), timeOut * 1000);
+  }
 
   createOptions() {
     const names = [];
@@ -56,7 +79,12 @@ class QuestionM {
       return this.data[el];
     })
 
+    this.timeOut = this.settings.set.timeToAnswer;
     this.updateView();
+
+    if (this.settings.set.isTimeGame) {
+      this.counter(this.timeOut);
+    }
 
     // ..............................
     function uniqueOptions(data) {
@@ -85,20 +113,28 @@ class QuestionM {
   }
 
   checkAnswer(e) {
-    let target = e.target;
-    if (!target.hasAttribute('data-num')) return;
+    if (e) {
+      let target = e.target;
 
-    let imageNum = target.getAttribute('data-num');
+      if (!target.hasAttribute('data-num')) {
+        return;
+      }
 
-    this.isRightAnswer = this.data[imageNum].isRight;
+      let imageNum = target.getAttribute('data-num');
+      this.isRightAnswer = this.data[imageNum].isRight;
+    }
+
     this.passedQuestns.push(this.isRightAnswer);
     this.isAnswered = true;
+
+    this.cancelCounter();
     this.updateView();
   }
 
   nextQuestion() {
     this.current++;
     this.isAnswered = false;
+    this.isRightAnswer = false;
 
     if (this.current === this.last) {
       this.isCatPassed = true;
@@ -157,14 +193,31 @@ class QuestionM {
   quitGame() {
     this.quit = true;
     this.updateView();
+
+    if (this.settings.set.isTimeGame) {
+      this.cancelCounter();
+    }
   }
 
   cancelQuit(e) {
     let cancelBtn = e.target.closest('.cancel-quit');
-    if (!cancelBtn) return;
+    if (!cancelBtn) {
+      return;
+    }
 
     this.quit = false;
     this.updateView();
+
+    if (this.settings.set.isTimeGame) {
+      this.counter(this.timeOut);
+    }
+  }
+
+  cancelCounter() {
+    clearInterval(this.intervalId);
+    clearTimeout(this.timeoutId);
+    this.intervalId = null;
+    this.timeoutId = null;
   }
 }
 

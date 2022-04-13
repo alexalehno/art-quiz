@@ -6,7 +6,7 @@ const TimeIndicator = {
         <div class="time-indicator__progress-inner"></div>
       </div>
 
-      <span class="time-indicator__time">0:20</span>
+      <span class="time-indicator__time">0:00</span>
     </div>`;
   }
 }
