@@ -103,7 +103,7 @@
   // question..........
   .time-indicator {
     width: 94%;
-    
+
     &__time {
       font-size: 18px;
     }
@@ -162,6 +162,126 @@
       width: 85px;
     }
   }
+
+  //result window.......... 
+  .question-result {
+    max-width: 520px;
+    padding: 30px;
+
+    &__img {
+      height: 416px;
+    }
+
+    &__indicator {
+      width: 60px;
+      height: 60px;
+      margin: 30px;
+    }
+
+    &__title {
+      font-size: 32px;
+    }
+
+    &__author,
+    &__year {
+      margin-bottom: 35px;
+      font-size: 22px;
+    }
+
+    &__btn {
+      max-width: 400px;
+      height: 62px;
+      font-size: 22px;
+    }
+  }
+
+  // .............Category result...............
+  .category-result {
+    max-width: 520px;
+    width: 522px;
+    padding: 40px;
+
+    &__img {
+      width: auto;
+    }
+
+    &__title {
+      font-size: 42px;
+    }
+
+    &__num-wrap {
+      margin-top: 40px;
+      margin-bottom: 65px;
+      font-size: 82px;
+    }
+
+    &__btn {
+      height: 62px;
+      font-size: 22px;
+    }
+
+    // .............Grand result...............
+
+    &__img-grand {
+      width: auto;
+    }
+
+    &__subtitle-grand {
+      margin: 0 auto 40px;
+      font-size: 77px;
+      line-height: 78px;
+    }
+
+    &__title-grand {
+      margin-bottom: 60px;
+      font-size: 42px;
+    }
+
+    &__btn-grand {
+      max-width: 400px;
+      height: 62px;
+    }
+
+    // .............Game over...............
+
+    &__img-over {
+      width: auto;
+      margin-bottom: 40px;
+    }
+
+    &__title-over {
+      margin-bottom: 15px;
+      font-size: 62px;
+    }
+
+    &__subtitle-over {
+      margin-bottom: 60px;
+      font-size: 42px;
+    }
+  }
+
+  .quit-game {
+    max-width: 580px;
+    padding: 30px;
+
+    &__title {
+      width: 340px;
+      margin: 45px auto 55px;
+      font-size: 32px;
+      line-height: 36px;
+    }
+
+    &__btn-wrap {
+      max-width: none;
+    }
+
+    &__btn {
+      width: 250px;
+      height: 62px;
+      font-size: 22px;
+    }
+  }
+
 }
 
 @media all and (min-width: 1440px) {

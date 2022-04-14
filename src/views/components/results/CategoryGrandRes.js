@@ -7,7 +7,7 @@ const CategoryGrandRes = {
     let catNum = lastCat(+request.catNum);
 
     return `
-    <div class="overlay category-overlay hidden">
+    <div class="overlay category-overlay  hidden">
       <div class="category-result">
         <img class="category-result__img-grand" src="${icon}" alt="icon"> 
         <span class="category-result__subtitle-grand">Grand result</span>

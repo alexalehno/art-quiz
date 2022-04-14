@@ -39,7 +39,9 @@ const Score = {
         <div class="score-btns score-btns--margin"> 
           <button class="score-btns__btn hover-opacity" data-sign="0"></button>
           <div class="score-btns__nums">
-            <span class="score-btns__num">0</span>/<span class="score-btns__num">0</span>
+            <span class="score-btns__num">0</span>
+            / 
+            <span class="score-btns__num">0</span>
           </div>
           <button class="score-btns__btn hover-opacity" data-sign="1"></button>
         </div>

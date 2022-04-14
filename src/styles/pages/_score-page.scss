@@ -102,8 +102,13 @@
     }
 
     &__nums {
-      display: inline-block;
       font-size: 25px;
+    }
+
+    &__num {
+      display: inline-block;
+      width: 15px;
+      text-align: center;
     }
   }
 }

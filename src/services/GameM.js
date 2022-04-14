@@ -26,8 +26,8 @@ class GameM {
 
       set: {
         volume: 0,
-        isTimeGame: true,
-        timeToAnswer: 15,
+        isTimeGame: false,
+        timeToAnswer: 5,
       },
 
       default: {
@@ -61,8 +61,13 @@ class GameM {
 
     let btnText = e.target.textContent.toLowerCase();
 
-    if (btnText === 'default') this.setVal(this.settings.pre, this.settings.default);
-    if (btnText === 'save') this.setVal(this.settings.set, this.settings.pre);
+    if (btnText === 'default') {
+      this.setVal(this.settings.pre, this.settings.default);
+    }
+
+    if (btnText === 'save') {
+      this.setVal(this.settings.set, this.settings.pre);
+    }
 
     this.isSaved = true;
     this.btnInner = btnText;

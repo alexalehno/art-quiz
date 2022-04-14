@@ -55,7 +55,8 @@ const questionView = new QuestionView();
 const questionC = new QuestionC();
 
 storage.qInfo = gameM.qInfo;
-storage.set = gameM.settings.set;
+storage.set = gameM.settings.set; //??????????????
+
 
 async function start() {
   await gameM.getData();
@@ -80,13 +81,13 @@ async function start() {
       gameC.start(gameM, app);
     }
 
-    if (request.catNum) {
-      const questionM = new QuestionM(gameM.data, request.resource, request.catNum - 1);
-      questionM.start(questionView, gameM.qInfo, gameM.settings);
-      questionView.start(questionM, app);
-      questionM.createOptions();
-      questionC.start(questionM, app);
-    }
+    // if (request.catNum) {
+    //   const questionM = new QuestionM(gameM.data, request.resource, request.catNum - 1);
+    //   questionM.start(questionView, gameM.qInfo, gameM.settings);
+    //   questionView.start(questionM, app);
+    //   questionM.createOptions();
+    //   questionC.start(questionM, app);
+    // }
   }
 
   router();
@@ -97,7 +98,7 @@ async function start() {
 window.addEventListener('load', () => {
   storage = localStorage.getData('storage') || storage;
   gameM.qInfo = storage.qInfo;
-  gameM.settings.set = storage.set;
+  gameM.settings.set = storage.set;  //??????????????
   start();
 });
 

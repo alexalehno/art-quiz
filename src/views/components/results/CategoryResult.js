@@ -13,7 +13,7 @@ const CategoryResult = {
         <h4 class="category-result__title">Congratulations!</h4>
 
         <div class="category-result__num-wrap">
-          <span class="category-result__num"></span>/<span class="category-result__num"></span>
+          <span class="category-result__num">0</span>/<span class="category-result__num">0</span>
         </div>
         
         <div class="category-result__btn-wrap">

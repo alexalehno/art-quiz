@@ -3,8 +3,9 @@
 // ....................question.......................
 
 .question-result {
-  max-width: 520px;
-  padding: 30px;
+  max-width: 380px;
+  width: 90%;
+  padding: 15px;
   box-sizing: border-box;
   border-radius: 20px;
   color: #010101;
@@ -14,8 +15,8 @@
 
   &__img {
     display: flex;
-    width: 462px;
-    height: 416px;
+    width: 100%;
+    height: 290px;
     border-radius: 20px;
     background-color: red;
     background-position: center;
@@ -24,36 +25,37 @@
 
   &__indicator {
     align-self: flex-end;
-    width: 60px;
-    height: 60px;
-    margin: 30px;
+    width: 40px;
+    height: 40px;
+    margin: 15px;
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.5);
+    background-size: 100%;
   }
 
   &__title {
+    margin-top: 20px;
     margin-bottom: 10px;
-    font-size: 32px;
+    font-size: 25px;
   }
 
   &__author,
   &__year {
     display: inline-block;
-    margin-bottom: 35px;
-    font-size: 22px;
+    margin-bottom: 20px;
+    font-size: 18px;
     font-style: italic;
   }
 
   &__btn {
     @include vars.flex_center;
-
-    max-width: 400px;
+    max-width: 290px;
     width: 100%;
-    height: 62px;
+    height: 48px;
     margin: 0 auto;
     border: none;
     border-radius: 56px;
-    font-size: 22px;
+    font-size: 18px;
     background-color: #FFBCA2;
   }
 }
@@ -62,9 +64,9 @@
 
 .category-result {
   // .............Category result...............
-
-  width: 522px;
-  padding: 40px;
+  max-width: 380px;
+  width: 90%;
+  padding: 25px 15px;
   box-sizing: border-box;
   border-radius: 20px;
   font-family: 'Gilroy-Regular';
@@ -72,34 +74,40 @@
   color: #010101;
   background-color: white;
 
+  &__img {
+    width: 150px;
+    margin-top: 30px;
+  }
+
   &__title {
-    margin: 30px 0;
+    margin: 20px 0;
     font-weight: 600;
-    font-size: 42px;
+    font-size: 22px;
   }
 
   &__num-wrap {
-    margin-top: 40px;
-    margin-bottom: 65px;
-
+    margin-bottom: 30px;
     font-family: 'Gilroy-Bold';
     font-weight: 700;
-    font-size: 82px;
+    font-size: 48px;
   }
 
   &__btn-wrap {
     display: flex;
     justify-content: space-between;
+    max-width: 440px;
     width: 100%;
+    margin: 0 auto
   }
 
   &__btn {
     @include vars.flex_center;
-    width: 210px;
-    height: 62px;
+    max-width: 210px;
+    width: 49%;
+    height: 48px;
     border: 1px solid;
     border-radius: 60px;
-    font-size: 22px;
+    font-size: 16px;
     text-decoration: none;
     color: inherit;
     background-color: white;
@@ -113,27 +121,30 @@
   // .............Grand result...............
 
   &__img-grand {
-    margin-bottom: 30px;
+    width: 250px;
+    margin: 20px 0;
   }
 
   &__subtitle-grand {
     display: block;
-    margin-bottom: 40px;
+    max-width: 200px;
+    margin: 0 auto 20px;
     font-family: 'Gilroy-Bold';
-    font-size: 77px;
-    line-height: 78px;
+    font-size: 52px;
+    line-height: 52px;
   }
 
   &__title-grand {
     margin-top: 0;
-    margin-bottom: 60px;
-    font-size: 42px;
+    margin-bottom: 35px;
+    font-size: 22px;
   }
 
   &__btn-grand {
     @include vars.flex_center;
-    width: 400px;
-    height: 62px;
+    max-width: 295px;
+    width: 100%;
+    height: 50px;
     margin: 0 auto;
     border-radius: 60px;
     font-size: 22px;
@@ -146,28 +157,30 @@
 
   &__img-over {
     margin-top: 40px;
-    margin-bottom: 40px;
+    width: 150px;
+    margin-bottom: 20px;
   }
 
   &__title-over {
     margin-top: 0;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     font-family: 'Gilroy-Bold';
-    font-size: 62px;
+    font-size: 36px;
   }
 
   &__subtitle-over {
     display: block;
-    margin-bottom: 60px;
-    font-size: 42px;
+    margin-bottom: 40px;
+    font-size: 22px;
   }
 }
 
 // ....................quit game.......................
 
 .quit-game {
-  width: 580px;
-  padding: 30px;
+  max-width: 400px;
+  width: 95%;
+  padding: 25px 15px;
   box-sizing: border-box;
   border-radius: 20px;
   font-family: 'Gilroy-Regular';
@@ -181,26 +194,29 @@
   }
 
   &__title {
-    width: 340px;
-    margin: 45px auto 65px;
-    font-size: 32px;
-    line-height: 36px;
+    width: 200px;
+    margin: 20px auto 45px;
+    font-size: 22px;
+    line-height: 28px;
+
     letter-spacing: -0.5px;
   }
 
   &__btn-wrap {
     display: flex;
     justify-content: space-between;
+    max-width: 310px;
     width: 100%;
+    margin: 0 auto
   }
 
   &__btn {
     @include vars.flex_center;
-    width: 250px;
-    height: 62px;
+    width: 150px;
+    height: 48px;
     border: 1px solid;
     border-radius: 60px;
-    font-size: 22px;
+    font-size: 16px;
     text-decoration: none;
     color: inherit;
     background-color: white;
