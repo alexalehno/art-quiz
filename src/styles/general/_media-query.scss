@@ -316,13 +316,6 @@
       font-size: 22px;
     }
   }
-
-  @keyframes save {
-    to {
-      transform: translate(-50%, -50%) scale(8);
-      opacity: 0;
-    }
-  }
 }
 
 @media all and (min-width: 1440px) {
@@ -404,7 +397,7 @@
   //question-artist.......... 
   .time-indicator {
     &__time {
-      width: 60px;
+      width: 65px;
       font-size: 28px;
     }
   }
@@ -435,12 +428,5 @@
   // footer..........
   .footer {
     padding: 0 40px;
-  }
-
-  @keyframes save {
-    to {
-      transform: translate(-50%, -50%) scale(13);
-      opacity: 0;
-    }
   }
 }

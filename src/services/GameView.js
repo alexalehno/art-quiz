@@ -56,7 +56,7 @@ class GameView {
     }
 
     // ..............................анимация кнопки settings....................................
-    if (this.gModel.isSaved) {
+    if (this.gModel.isSaved && document.documentElement.clientWidth >= 768) {
       btnAnimation('save', this.page);
     }
 
