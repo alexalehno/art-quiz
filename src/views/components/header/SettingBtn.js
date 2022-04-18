@@ -3,7 +3,7 @@ import { storage } from '../../../services/funcs';
 
 const SettingBtn = {
   render(path) {
-    storage.s.btnPath = path;
+    storage.btnPath = path;
 
     return `
     <a class="set-btn hover-rotate" href="/#/settings">

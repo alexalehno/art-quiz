@@ -8,15 +8,15 @@ import QuestionArtist from './views/pages/QuestionArtist';
 import QuestionPictures from './views/pages/QuestionPictures';
 import Error404 from './views/pages/Error404';
 import Score from './views/pages/Score';
-import Utils from './services/Utils';
 // ...............................................................................
-import QuestionM from './services/QuestionM';
-import QuestionView from './services/QuestionView';
-import QuestionC from './services/QuestionC';
+import Utils from './services/Utils';
 
 import GameM from './services/GameM';
 import GameView from './services/GameView';
 import GameC from './services/GameC';
+import QuestionM from './services/QuestionM';
+import QuestionView from './services/QuestionView';
+import QuestionC from './services/QuestionC';
 // ...............................................................................
 import LocalStorage from './services/LocalStorage';
 import { storage } from './services/funcs';
@@ -44,8 +44,8 @@ const gameC = new GameC();
 const questionView = new QuestionView();
 const questionC = new QuestionC();
 
-storage.s.qInfo = gameM.qInfo;
-storage.s.set = gameM.settings.set;
+storage.qInfo = gameM.qInfo;
+storage.set = gameM.settings.set;
 
 async function start() {
   await gameM.getData();
@@ -60,14 +60,16 @@ async function start() {
 
     gameM.start(gameView, request.resource);
     gameView.start(gameM, app);
+    gameC.start(gameM, app);
+
     gameM.updateView();
 
     if (request.resource === 'settings') {
-      gameC.settings(gameM, app);
+      gameC.settings();
     }
 
     if (request.score) {
-      gameC.start(gameM, app);
+      gameC.score();
     }
 
     if (request.catNum) {
@@ -84,13 +86,14 @@ async function start() {
 }
 
 window.addEventListener('load', () => {
-  storage.s = localStorage.getData('storage') || storage.s;
+  const locData = localStorage.getData('storage') || storage;
 
-  gameM.qInfo = storage.s.qInfo;
-  gameM.settings.set = storage.s.set;
+  gameM.setVal(storage, locData);
+  gameM.qInfo = storage.qInfo;
+  gameM.settings.set = storage.set;
   start();
 });
 
 window.addEventListener('beforeunload', () => {
-  localStorage.setData('storage', storage.s);
+  localStorage.setData('storage', storage);
 });

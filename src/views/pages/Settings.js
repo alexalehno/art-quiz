@@ -10,7 +10,7 @@ const Settings = {
     <div class="settings-page page">
       <header class="settings-page__header header container">
         <h2 class="settings-page__header-title">Settings</h2>
-        ${CloseBtn.render(storage.s.btnPath, '')}    
+        ${CloseBtn.render(storage.btnPath, '')}    
       </header>
       
       <main class="settings container">

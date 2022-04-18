@@ -1,9 +1,6 @@
 @use '../general/vars';
 
 .question-pictures {
-  &__header {
-    @include vars.space-between_center;
-  }
 
   &__options {
     display: flex;

@@ -53,14 +53,23 @@ button {
   align-items: flex-start;
 }
 
+.question-header {
+  @include vars.space-between_center;
+}
+
 .question-container {
   max-width: 825px;
   width: 90%;
-  margin: 0 auto;
+  margin: 0 auto 10px;
 }
 
 .question-title {
   margin: 0;
   font-size: 22px;
   letter-spacing: -0.5px;
+
+  &__artist-name {
+    font-size: 24px;
+    color: #e68787;
+  }
 }

@@ -154,7 +154,7 @@ class QuestionView {
         getImg(item.imageNum, this.options.children[i]);
 
         if (item.isRight) {
-          this.questnEl.textContent = item.author;
+          this.questnEl.textContent = `- ${item.author} -`;
         }
       }
 

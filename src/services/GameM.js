@@ -15,7 +15,6 @@ class GameM {
     this.isSoundPlay = false;
 
     this.isSaved = false;
-    // this.btnInner = null;
 
     this.settings = {
       pre: {
@@ -71,18 +70,15 @@ class GameM {
     if (btnText === 'save') {
       this.setVal(this.settings.set, this.settings.pre);
       this.isSaved = true;
-      // this.btnInner = btnText;
     }
 
-    // this.isSaved = true;
-    // this.btnInner = btnText;
     this.updateView();
     this.isSaved = false;
   }
 
   setVal(obj1, obj2) {
-    this.setObj2 = obj2;
     this.setObj1 = obj1;
+    this.setObj2 = obj2;
 
     const keys = Object.keys(this.setObj2);
 

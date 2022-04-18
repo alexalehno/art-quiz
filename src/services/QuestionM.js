@@ -132,11 +132,12 @@ class QuestionM {
       this.isRightAnswer = this.data[imageNum].isRight;
     }
 
-    this.passedQuestns.push(this.isRightAnswer);
-    this.isAnswered = true;
-
-    this.cancelTimeCount();
-    this.updateView();
+    if (!this.isAnswered) {
+      this.passedQuestns.push(this.isRightAnswer);
+      this.isAnswered = true;
+      this.cancelTimeCount();
+      this.updateView();
+    }
   }
 
   nextQuestion() {
@@ -152,23 +153,25 @@ class QuestionM {
       return 0;
     }
 
-    this.current++;
-    this.isAnswered = false;
-    this.isRightAnswer = false;
+    if (this.isAnswered) {
+      this.current++;
+      this.isAnswered = false;
+      this.isRightAnswer = false;
 
-    if (this.current === this.last) {
-      this.isCatPassed = true;
-      this.numTrueAnsw = this.passedQuestns.filter((item) => item).length;
-      this.catResBlock = chooseResBlock(this.numTrueAnsw, this.passedQuestns.length);
-      this.updateView();
-    }
+      if (this.current === this.last) {
+        this.isCatPassed = true;
+        this.numTrueAnsw = this.passedQuestns.filter((item) => item).length;
+        this.catResBlock = chooseResBlock(this.numTrueAnsw, this.passedQuestns.length);
+        this.updateView();
+      }
 
-    if (!this.isCatPassed) {
-      this.createOptions();
-    }
+      if (!this.isCatPassed) {
+        this.createOptions();
+      }
 
-    if (this.isCatPassed) {
-      this.sendInfo();
+      if (this.isCatPassed) {
+        this.sendInfo();
+      }
     }
   }
 

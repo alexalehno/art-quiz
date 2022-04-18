@@ -31,7 +31,7 @@ export function btnAnimation(text, page) {
     const el = document.createElement('span');
 
     el.textContent = text.toUpperCase();
-    el.classList.add('settings-page__saved');
+    el.classList.add('btn-animation');
     page.append(el);
 
     setTimeout(() => el.remove(), 1000);
@@ -45,9 +45,7 @@ export function btnAnimation(text, page) {
 }
 
 export const storage = {
-  s: {
-    btnPath: null,
-    qInfo: null,
-    set: null,
-  },
+  btnPath: null,
+  qInfo: null,
+  set: null,
 };

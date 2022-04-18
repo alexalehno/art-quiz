@@ -6,7 +6,9 @@ class GameC {
   start(model, field) {
     this.gModel = model;
     this.gField = field;
+  }
 
+  score() {
     const scoreList = this.gField.querySelector('.score__list');
     scoreList.addEventListener('click', (e) => this.showScoreInfo(e));
 
@@ -14,10 +16,7 @@ class GameC {
     scoreBtns.addEventListener('click', (e) => this.switchPage(e));
   }
 
-  settings(model, field) {
-    this.gModel = model;
-    this.gField = field;
-
+  settings() {
     const volumeRange = this.gField.querySelector('.settings__volume-progress');
     volumeRange.addEventListener('input', (e) => this.setVolume(e));
 

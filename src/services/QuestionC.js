@@ -11,14 +11,10 @@ class QuestionC {
     cls = (this.qModel.type === 'categories_artist') ? cls = '.question-artist__options' : cls = '.question-pictures__options';
 
     const options = this.qField.querySelector(cls);
-    options.addEventListener('click', (e) => {
-      if (!this.qModel.isAnswered) { this.checkAnswer(e); }
-    });
+    options.addEventListener('click', (e) => this.checkAnswer(e));
 
     const nextQ = this.qField.querySelector('.question-result__btn');
-    nextQ.addEventListener('click', () => {
-      if (this.qModel.isAnswered) this.nextQuestion();
-    });
+    nextQ.addEventListener('click', () => this.nextQuestion());
 
     const quitGameBtn = this.qField.querySelector('.quit-game');
     quitGameBtn.addEventListener('click', (e) => this.cancelQuit(e));

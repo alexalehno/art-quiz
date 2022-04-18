@@ -12,7 +12,7 @@ const QuestionArtist = {
   render(request) {
     return `
     <div class="question-pictures page">
-      <header class="question-pictures__header question-container">
+      <header class="question-header question-container">
         ${CloseBtn.render(`${request.resource}/${request.catNum}`, 'quit-btn')}
         ${TimeIndicator.render()}
       </header>
