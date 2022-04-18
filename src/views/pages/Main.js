@@ -1,9 +1,9 @@
-import Footer from '../components/Footer.js';
-import SettingBtn from '../components/header/SettingBtn.js';
+import Footer from '../components/Footer';
+import SettingBtn from '../components/header/SettingBtn';
 import mainLogo from '../../images/icon/main/logo-main.svg';
 
 const Main = {
-  
+
   render() {
     return `
     <div class="main-page page">
@@ -13,7 +13,6 @@ const Main = {
 
       <main class="main container">
         <img class="main__logo" src="${mainLogo}" alt="logo-img">
-
         <div class="main__question">
           <a class="main__question-btn hover-bg" href="/#/categories_artist">Artist quiz</a>
           <a class="main__question-btn hover-bg" href="/#/categories_pictures">Pictures quiz</a>
@@ -22,7 +21,7 @@ const Main = {
 
       ${Footer.render()}
     </div>`;
-  }
-}
+  },
+};
 
 export default Main;

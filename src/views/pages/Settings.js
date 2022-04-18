@@ -1,9 +1,8 @@
-import Footer from '../components/Footer.js';
+import Footer from '../components/Footer';
 import CloseBtn from '../components/header/CloseBtn';
-
 import muteBtn from '../../images/icon/setting/mute.svg';
 import soundBtn from '../../images/icon/setting/sound.svg';
-import { storage } from '../../app.js';
+import { storage } from '../../services/funcs';
 
 const Settings = {
   render() {
@@ -11,8 +10,7 @@ const Settings = {
     <div class="settings-page page">
       <header class="settings-page__header header container">
         <h2 class="settings-page__header-title">Settings</h2>
-
-        ${CloseBtn.render(storage.btnPath, '')}
+        ${CloseBtn.render(storage.s.btnPath, '')}    
       </header>
       
       <main class="settings container">
@@ -55,7 +53,7 @@ const Settings = {
       
       ${Footer.render()}
     </div>`;
-  }
-}
+  },
+};
 
 export default Settings;

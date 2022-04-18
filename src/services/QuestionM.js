@@ -7,8 +7,9 @@ class QuestionM {
     this.isCatPassed = false;
     this.passedQuestns = [];
 
+    this.num = num;
     this.catNum = num;
-    this.current = (type === 'categories_artist') ? num *= 10 : (num *= 10) + 120;
+    this.current = (type === 'categories_artist') ? this.num *= 10 : (this.num *= 10) + 120;
     this.last = this.current + 10;
     this.type = type;
 
@@ -22,13 +23,14 @@ class QuestionM {
 
     // ..............
     this.timeOut = null;
-
     this.intervalId = null;
     this.timeoutId = null;
   }
 
   qView = null;
+
   qInfo = null;
+
   settings = null;
 
   start(view, info, set) {
@@ -42,9 +44,9 @@ class QuestionM {
     if (this.qView) {
       this.qView.update();
     }
-  };
+  }
 
-  counter(timeOut) {
+  timeCounter(timeOut) {
     this.intervalId = setInterval(() => {
       this.timeOut--;
 
@@ -59,50 +61,11 @@ class QuestionM {
   }
 
   createOptions() {
-    const names = [];
-    const numbers = [];
-    const author = this.data[this.current].author;
+    function shuffle(arr) {
+      const array = arr;
 
-    names.push(author);
-    numbers.push(this.current);
-
-    uniqueOptions(this.data);
-    // shuffle(numbers);
-
-    this.options = numbers.map(el => {
-      if (el === this.current) {
-        this.data[el].isRight = true;
-      } else {
-        this.data[el].isRight = false;
-      }
-
-      return this.data[el];
-    })
-
-    this.timeOut = this.settings.set.timeToAnswer;
-    this.updateView();
-
-    if (this.settings.set.isTimeGame) {
-      this.counter(this.timeOut);
-    }
-
-    // ..............................
-    function uniqueOptions(data) {
-      while (numbers.length < 4) {
-        let num = randomRange(0, data.length - 1);
-
-        if (numbers.includes(num) || names.includes(data[num].author)) {
-          return uniqueOptions(data);
-        }
-
-        names.push(data[num].author);
-        numbers.push(num);
-      }
-    }
-
-    function shuffle(array) {
       for (let i = array.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
+        const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
       }
     }
@@ -110,35 +73,92 @@ class QuestionM {
     function randomRange(n, m) {
       return Math.floor(Math.random() * (m - n + 1)) + n;
     }
+
+    function uniqueOptions(data, arr1, arr2) {
+      const numsArr = arr1;
+      const namesArr = arr2;
+
+      while (numsArr.length < 4) {
+        const num = randomRange(0, data.length - 1);
+
+        if (numsArr.includes(num) || namesArr.includes(data[num].author)) {
+          return uniqueOptions(data, arr1, arr2);
+        }
+
+        namesArr.push(data[num].author);
+        numsArr.push(num);
+      }
+
+      return undefined;
+    }
+
+    const names = [];
+    const numbers = [];
+    const { author } = this.data[this.current];
+
+    names.push(author);
+    numbers.push(this.current);
+
+    uniqueOptions(this.data, numbers, names);
+    shuffle(numbers);
+
+    this.options = numbers.map((el) => {
+      if (el === this.current) {
+        this.data[el].isRight = true;
+      } else {
+        this.data[el].isRight = false;
+      }
+
+      return this.data[el];
+    });
+
+    this.timeOut = this.settings.set.timeToAnswer;
+    this.updateView();
+
+    if (this.settings.set.isTimeGame) {
+      this.timeCounter(this.timeOut);
+    }
   }
 
   checkAnswer(e) {
     if (e) {
-      let target = e.target;
+      const { target } = e;
 
       if (!target.hasAttribute('data-num')) {
         return;
       }
 
-      let imageNum = target.getAttribute('data-num');
+      const imageNum = target.getAttribute('data-num');
       this.isRightAnswer = this.data[imageNum].isRight;
     }
 
     this.passedQuestns.push(this.isRightAnswer);
     this.isAnswered = true;
 
-    this.cancelCounter();
+    this.cancelTimeCount();
     this.updateView();
   }
 
   nextQuestion() {
+    function chooseResBlock(num, length) {
+      if (num && num !== length) {
+        return 1;
+      }
+
+      if (num && num === length) {
+        return 2;
+      }
+
+      return 0;
+    }
+
     this.current++;
     this.isAnswered = false;
     this.isRightAnswer = false;
 
     if (this.current === this.last) {
       this.isCatPassed = true;
-      this.numTrueAnsw = this.passedQuestns.filter(item => item).length;
+      this.numTrueAnsw = this.passedQuestns.filter((item) => item).length;
       this.catResBlock = chooseResBlock(this.numTrueAnsw, this.passedQuestns.length);
       this.updateView();
     }
@@ -150,34 +170,28 @@ class QuestionM {
     if (this.isCatPassed) {
       this.sendInfo();
     }
-
-    function chooseResBlock(num, length) {
-      if (num && num !== length) return 1;
-      if (num && num === length) return 2;
-      return 0;
-    }
   }
 
   sendInfo() {
-    let catInfo = {
+    const catInfo = {
       type: null,
       num: null,
       questns: null,
       total: null,
       ready: null,
-    }
+    };
 
     catInfo.type = this.type;
     catInfo.num = this.catNum;
     catInfo.questns = this.passedQuestns;
-    catInfo.total = this.passedQuestns.length
-    catInfo.ready = this.passedQuestns.filter(item => item).length
+    catInfo.total = this.passedQuestns.length;
+    catInfo.ready = this.passedQuestns.filter((item) => item).length;
 
     this.qInfo.forEach((item, i) => {
       if (item.num === catInfo.num && item.type === catInfo.type) {
-        this.qInfo.splice(i, 1)
+        this.qInfo.splice(i, 1);
       }
-    })
+    });
 
     this.qInfo.push(catInfo);
     this.qInfo.sort((a, b) => a.num - b.num);
@@ -195,12 +209,12 @@ class QuestionM {
     this.updateView();
 
     if (this.settings.set.isTimeGame) {
-      this.cancelCounter();
+      this.cancelTimeCount();
     }
   }
 
   cancelQuit(e) {
-    let cancelBtn = e.target.closest('.cancel-quit');
+    const cancelBtn = e.target.closest('.cancel-quit');
     if (!cancelBtn) {
       return;
     }
@@ -209,11 +223,11 @@ class QuestionM {
     this.updateView();
 
     if (this.settings.set.isTimeGame) {
-      this.counter(this.timeOut);
+      this.timeCounter(this.timeOut);
     }
   }
 
-  cancelCounter() {
+  cancelTimeCount() {
     clearInterval(this.intervalId);
     clearTimeout(this.timeoutId);
     this.intervalId = null;

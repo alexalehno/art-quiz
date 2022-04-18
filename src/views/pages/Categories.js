@@ -1,21 +1,17 @@
-import Footer from '../components/Footer.js';
-import CategoryItem from '../components/CategoryItem.js';
-import SettingBtn from '../components/header/SettingBtn.js';
-import Logo from '../components/header/Logo.js';
-import Nav from '../components/header/Nav.js';
+import Footer from '../components/Footer';
+import CategoryItem from '../components/CategoryItem';
+import SettingBtn from '../components/header/SettingBtn';
+import Logo from '../components/header/Logo';
+import Nav from '../components/header/Nav';
 import { importAll } from '../../services/funcs';
-import { storage } from '../../app.js';
 
-
-export const categoryImg = [];
+const categoryImg = [];
 
 importAll(require.context('../../images/image/category', true, /\.jpg$/), categoryImg);
 
 const Categories = {
   render(request) {
-    storage.questionType = request.resource;
-
-    let type = request.resource.split('_')[1];
+    const type = request.resource.split('_')[1];
 
     return `
     <div class="category-page page">
@@ -34,7 +30,7 @@ const Categories = {
 
       ${Footer.render()}
     </div>`;
-  }
-}
+  },
+};
 
 export default Categories;

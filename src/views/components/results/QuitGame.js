@@ -1,4 +1,4 @@
-import CloseBtn from '../header/CloseBtn.js';
+import CloseBtn from '../header/CloseBtn';
 
 const QuitGame = {
   render(request) {
@@ -14,7 +14,7 @@ const QuitGame = {
       </div>
     </div>
     `;
-  }
-}
+  },
+};
 
 export default QuitGame;

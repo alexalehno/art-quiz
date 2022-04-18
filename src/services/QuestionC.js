@@ -1,23 +1,24 @@
 class QuestionC {
   qModel = null;
+
   qField = null;
 
   start(model, field) {
     this.qModel = model;
     this.qField = field;
 
-    let cls = (this.qModel.type === 'categories_artist') ? cls = '.question-artist__options' : cls = '.question-pictures__options';
+    let cls = null;
+    cls = (this.qModel.type === 'categories_artist') ? cls = '.question-artist__options' : cls = '.question-pictures__options';
 
     const options = this.qField.querySelector(cls);
     options.addEventListener('click', (e) => {
-      if (!this.qModel.isAnswered)
-        this.checkAnswer(e)
+      if (!this.qModel.isAnswered) { this.checkAnswer(e); }
     });
 
     const nextQ = this.qField.querySelector('.question-result__btn');
     nextQ.addEventListener('click', () => {
       if (this.qModel.isAnswered) this.nextQuestion();
-    })
+    });
 
     const quitGameBtn = this.qField.querySelector('.quit-game');
     quitGameBtn.addEventListener('click', (e) => this.cancelQuit(e));
@@ -29,11 +30,14 @@ class QuestionC {
     quitBtn.addEventListener('click', () => this.quitGame());
   }
 
-  // контроллер вызывает только методы модели
   checkAnswer = (e) => this.qModel.checkAnswer(e);
+
   cancelQuit = (e) => this.qModel.cancelQuit(e);
+
   playAgain = () => this.qModel.playAgain();
+
   quitGame = () => this.qModel.quitGame();
+
   nextQuestion = () => this.qModel.nextQuestion();
 }
 

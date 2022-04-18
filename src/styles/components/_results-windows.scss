@@ -2,6 +2,20 @@
 
 // ....................question.......................
 
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  @include vars.flex_center;
+
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: calc(vars.$transition * 1.2);
+  transition-delay: 0.2s;
+}
+
 .question-result {
   max-width: 380px;
   width: 90%;

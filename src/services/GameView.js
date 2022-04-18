@@ -1,12 +1,16 @@
+import { getImg, btnAnimation } from './funcs';
 
 class GameView {
   gModel = null;
+
   gField = null;
 
   categoryItems = null;
+
   scoreItems = null;
 
   volumeRange = null;
+
   volumeBtns = null;
 
   page = null;
@@ -25,10 +29,10 @@ class GameView {
   }
 
   update() {
-    let data = this.gModel.data;
-    let count = this.gModel.count;
-    let catType = this.gModel.catType;
-    let pages = this.gModel.pages;
+    const { data } = this.gModel;
+    const { pageNum } = this.gModel;
+    const { catType } = this.gModel;
+    const { pages } = this.gModel;
 
     // ..................category item.............................................
     if (this.categoryItems.length) {
@@ -37,12 +41,12 @@ class GameView {
 
     // ..................score item.............................................
     if (this.scoreItems.length && pages.length) {
-      this.scoreCard(data, count, catType, pages);
+      this.scoreCard(data, pageNum, catType, pages);
     }
 
     // ........................................................................
-    if (this.gModel.catType === 'settings') {
-      this.settings()
+    if (catType === 'settings') {
+      this.settings();
     }
   }
 
@@ -53,90 +57,76 @@ class GameView {
 
     // ..............................анимация кнопки settings....................................
     if (this.gModel.isSaved) {
-      this.animateSetBtn(this.gModel.btnInner, this.page);
+      btnAnimation('save', this.page);
     }
 
     // ..............................time game....................................................
     const answerBtns = this.gField.querySelector('.settings__answer-btn-wrap');
     const checkBox = this.gField.querySelector('.settings__time-input');
-    let timeGame = this.gModel.settings.pre.isTimeGame;
+    const { isTimeGame } = this.gModel.settings.pre;
 
-    if (timeGame) {
+    if (isTimeGame) {
       answerBtns.classList.remove('opacity');
       answerBtns.children[0].removeAttribute('disabled');
       answerBtns.children[2].removeAttribute('disabled');
-
     } else {
       answerBtns.classList.add('opacity');
       answerBtns.children[0].setAttribute('disabled', true);
       answerBtns.children[2].setAttribute('disabled', true);
     }
 
-    checkBox.checked = timeGame;
+    checkBox.checked = isTimeGame;
 
     // ..............................time to answer....................................
     const timeNum = answerBtns.querySelector('.settings__answer-input');
     timeNum.value = this.gModel.settings.pre.timeToAnswer;
 
     // ..............................sound....................................................
-    let vol = this.gModel.settings.pre.volume;
-    this.volumeRange.value = vol;
-    this.volumeRange.style.background = `linear-gradient(to right, #FFBCA2 0%, #FFBCA2 ${vol}%, #A4A4A4 ${vol}%, #A4A4A4 100%)`;
+    const { volume } = this.gModel.settings.pre;
+    this.volumeRange.value = volume;
+    this.volumeRange.style.background = `linear-gradient(to right, #FFBCA2 0%, #FFBCA2 ${volume}%, #A4A4A4 ${volume}%, #A4A4A4 100%)`;
 
-    if (+vol) {
+    if (+volume) {
       this.volumeBtns[0].classList.remove('settings__volume-img--active');
       this.volumeBtns[1].classList.add('settings__volume-img--active');
-
     } else {
       this.volumeBtns[0].classList.add('settings__volume-img--active');
       this.volumeBtns[1].classList.remove('settings__volume-img--active');
     }
   }
 
-  animateSetBtn(text, page) {
-    let timerId = null;
-    timerId = setInterval(() => saved(text), 130);
-
-    setTimeout(() => {
-      clearInterval(timerId);
-    }, 1000);
-
-    function saved() {
-      let el = document.createElement('p');
-      el.textContent = text.toUpperCase();
-      el.classList.add('settings-page__saved');
-      page.append(el);
-      setTimeout(() => el.remove(), 1000);
-    }
-  }
-
-  scoreCard(data, count, catType, pages) {
+  scoreCard(data, pageNum, catType, pages) {
     document.querySelector('.score__sub-title').classList.add('none');
+    document.querySelector('.score__list').classList.remove('none');
 
     this.scoreItems.forEach((item, i) => {
-      item.classList.remove('none');
-      item.classList.remove('gray');
-      if (!pages[count].questns[i]) item.classList.add('gray');
-      setInfo(catType, count, pages, this.getImg);
-
-
-      function setInfo(type, count, info, func) {
-        const inner = item.querySelectorAll('.score__item-title, .score__item-bg, .score__item-name, .score__item-artist, .score__item-year');
-        let c = type === 'categories_artist' ? c = i : c = i + 120;
-        let num = info[count].num * 10 + c;
-
-        inner[0].textContent = `Cat-${info[count].num + 1}`;
-        inner[2].textContent = data[num].name;
-        inner[3].textContent = data[num].author;
-        inner[4].textContent = data[num].year;
-        func(data[num].imageNum, inner[1]);
+      if (item.classList.contains('gray')) {
+        item.classList.remove('gray');
       }
-    })
+
+      if (!pages[pageNum].questns[i]) {
+        item.classList.add('gray');
+      }
+
+      const inner = item.querySelectorAll('.score__item-title, .score__item-bg, .score__item-name, .score__item-artist, .score__item-year');
+
+      let c;
+
+      c = catType === 'categories_artist' ? c = i : c = i + 120;
+
+      const num = pages[pageNum].num * 10 + c;
+
+      inner[0].textContent = `Cat-${pages[pageNum].num + 1}`;
+      inner[2].textContent = data[num].name;
+      inner[3].textContent = data[num].author;
+      inner[4].textContent = data[num].year;
+      getImg(data[num].imageNum, inner[1]);
+    });
 
     // ............................................................
     // ....................номера страниц..........................
     const numPages = this.gField.querySelectorAll('.score-btns__num');
-    numPages[0].textContent = count + 1;
+    numPages[0].textContent = pageNum + 1;
     numPages[1].textContent = pages.length;
     // .....................показать информацию score item.......................
     if (this.gModel.isItemShown) {
@@ -146,18 +136,12 @@ class GameView {
   }
 
   categoryCard(pages) {
-    pages.forEach(item => {
-      let catItemNums = this.categoryItems[item.num].querySelectorAll('.category-item__num');
+    pages.forEach((item) => {
+      const catItemNums = this.categoryItems[item.num].querySelectorAll('.category-item__num');
       this.categoryItems[item.num].classList.remove('not-played');
       catItemNums[0].textContent = item.ready;
       catItemNums[1].textContent = item.total;
-    })
-  }
-
-  getImg(i, d) {
-    const img = new Image();
-    img.src = `https://raw.githubusercontent.com/alexalehno/image-data/master/img/${i}.jpg`;
-    img.onload = () => d.style.backgroundImage = `url(${img.src})`;
+    });
   }
 }
 

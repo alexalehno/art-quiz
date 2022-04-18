@@ -1,4 +1,3 @@
-
 const Error404 = {
   render() {
     return `
@@ -6,7 +5,7 @@ const Error404 = {
       <h1>404 Error</h1>
     </div>
     `;
-  }
-}
+  },
+};
 
 export default Error404;

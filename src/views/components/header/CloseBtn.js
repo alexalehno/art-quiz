@@ -6,7 +6,7 @@ const CloseBtn = {
     <a class="set-btn hover-rotate ${cls}" href="/#/${path}">
       <img src="${icon}" alt="cross">
     </a>`;
-  }
-}
+  },
+};
 
 export default CloseBtn;

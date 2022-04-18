@@ -1,10 +1,9 @@
-import icon from '../../../images/icon/question/grand-res.svg'
+import icon from '../../../images/icon/question/grand-res.svg';
 import { lastCat } from '../../../services/funcs';
 
 const CategoryGrandRes = {
   render(request) {
-
-    let catNum = lastCat(+request.catNum);
+    const catNum = lastCat(+request.catNum);
 
     return `
     <div class="overlay category-overlay  hidden">
@@ -16,7 +15,7 @@ const CategoryGrandRes = {
       </div>
     </div>
     `;
-  }
-}
+  },
+};
 
 export default CategoryGrandRes;

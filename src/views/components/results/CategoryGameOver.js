@@ -17,7 +17,7 @@ const CategoryGameOver = {
       </div>
     </div>
     `;
-  }
-}
+  },
+};
 
 export default CategoryGameOver;

@@ -1,34 +1,27 @@
 import scss from './styles/index.scss';
 import html from './index.html';
 // ...............................................................................
-import Main from './views/pages/Main.js';
-import Settings from './views/pages/Settings.js';
-import Categories from './views/pages/Categories.js';
-import QuestionArtist from './views/pages/QuestionArtist.js';
-import QuestionPictures from './views/pages/QuestionPictures.js';
-import Error404 from './views/pages/Error404.js';
-import Score from './views/pages/Score.js';
-import Utils from './services/Utils.js';
+import Main from './views/pages/Main';
+import Settings from './views/pages/Settings';
+import Categories from './views/pages/Categories';
+import QuestionArtist from './views/pages/QuestionArtist';
+import QuestionPictures from './views/pages/QuestionPictures';
+import Error404 from './views/pages/Error404';
+import Score from './views/pages/Score';
+import Utils from './services/Utils';
 // ...............................................................................
-import QuestionM from './services/QuestionM.js';
-import QuestionView from './services/QuestionView.js';
-import QuestionC from './services/QuestionC.js';
+import QuestionM from './services/QuestionM';
+import QuestionView from './services/QuestionView';
+import QuestionC from './services/QuestionC';
 
-import GameM from './services/GameM.js';
-import GameView from './services/GameView.js';
-import GameC from './services/GameC.js';
+import GameM from './services/GameM';
+import GameView from './services/GameView';
+import GameC from './services/GameC';
 // ...............................................................................
 import LocalStorage from './services/LocalStorage';
+import { storage } from './services/funcs';
 // ...............................................................................
 // ...............................................................................
-
-
-export let storage = {
-  btnPath: null,
-  questionType: null,
-  qInfo: null,
-  set: null,
-}
 
 const routes = {
   '/': Main,
@@ -44,27 +37,23 @@ const routes = {
 };
 
 const app = document.querySelector('.app');
-
-const localStorage = new LocalStorage();
-
+const localStorage = new LocalStorage(window.localStorage);
 const gameM = new GameM();
 const gameView = new GameView();
 const gameC = new GameC();
-
 const questionView = new QuestionView();
 const questionC = new QuestionC();
 
-storage.qInfo = gameM.qInfo;
-storage.set = gameM.settings.set; //??????????????
-
+storage.s.qInfo = gameM.qInfo;
+storage.s.set = gameM.settings.set;
 
 async function start() {
   await gameM.getData();
 
   function router() {
-    let request = Utils.parseRequestURL();
-    let parsedURL = (request.resource ? '/' + request.resource : '/') + (request.catNum ? '/cat_num' : '') + (request.score ? '/score' : '');
-    let page = routes[parsedURL] ? routes[parsedURL] : Error404;
+    const request = Utils.parseRequestURL();
+    const parsedURL = (request.resource ? `/${request.resource}` : '/') + (request.catNum ? '/cat_num' : '') + (request.score ? '/score' : '');
+    const page = routes[parsedURL] ? routes[parsedURL] : Error404;
     app.innerHTML = page.render(request);
     // ...............................................................................
     // ...............................................................................
@@ -81,28 +70,27 @@ async function start() {
       gameC.start(gameM, app);
     }
 
-    // if (request.catNum) {
-    //   const questionM = new QuestionM(gameM.data, request.resource, request.catNum - 1);
-    //   questionM.start(questionView, gameM.qInfo, gameM.settings);
-    //   questionView.start(questionM, app);
-    //   questionM.createOptions();
-    //   questionC.start(questionM, app);
-    // }
+    if (request.catNum) {
+      const questionM = new QuestionM(gameM.data, request.resource, request.catNum - 1);
+      questionM.start(questionView, gameM.qInfo, gameM.settings);
+      questionView.start(questionM, app);
+      questionM.createOptions();
+      questionC.start(questionM, app);
+    }
   }
 
   router();
   window.addEventListener('hashchange', router);
 }
 
-
 window.addEventListener('load', () => {
-  storage = localStorage.getData('storage') || storage;
-  gameM.qInfo = storage.qInfo;
-  gameM.settings.set = storage.set;  //??????????????
+  storage.s = localStorage.getData('storage') || storage.s;
+
+  gameM.qInfo = storage.s.qInfo;
+  gameM.settings.set = storage.s.set;
   start();
 });
 
 window.addEventListener('beforeunload', () => {
-  localStorage.setData('storage', storage);
+  localStorage.setData('storage', storage.s);
 });
-

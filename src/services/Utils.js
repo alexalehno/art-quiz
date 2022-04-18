@@ -1,16 +1,22 @@
 const Utils = {
 
   parseRequestURL() {
-    let url = location.hash.slice(1).toLowerCase() || '/';
-    let r = url.split("/");
+    const url = window.location.hash.slice(1).toLowerCase() || '/';
+    const r = url.split('/');
 
-    let request = {}
+    const [first, second] = r.slice(1);
+    const request = {};
 
-    request.resource = r[1];
-    isFinite(r[2]) ? request.catNum = r[2] : request.score = r[2];
+    request.resource = first;
+
+    if (+second) {
+      request.catNum = second;
+    } else {
+      request.score = second;
+    }
 
     return request;
-  }
-}
+  },
+};
 
 export default Utils;

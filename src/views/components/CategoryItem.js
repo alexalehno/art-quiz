@@ -13,9 +13,8 @@ const CategoryItem = {
         <img class="category-item__img" src="${item}" alt="img-${i}">
         <span class="category-item__play-again">Play again</span>
       </a>
-    </li>
-    `;
-  }
-}
+    </li>`;
+  },
+};
 
 export default CategoryItem;

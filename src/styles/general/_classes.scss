@@ -1,0 +1,60 @@
+@use 'vars';
+
+
+.hover-opacity {
+  transition: vars.$transition;
+
+  &:hover {
+    opacity: vars.$opacity;
+  }
+}
+
+.hover-bg {
+  transition: vars.$transition;
+
+  &:hover {
+    background-color: white;
+    color: black;
+  }
+
+  &:active {
+    border-color: #FFBCA2;
+    background-color: #FFBCA2;
+    color: black;
+  }
+}
+
+.hover-rotate {
+  transition: vars.$transition;
+
+  &:hover {
+    transform: rotate(-360deg);
+  }
+}
+
+.opacity {
+  opacity: 35%;
+}
+
+.not-played {
+  filter: grayscale(100%);
+
+  & .category-item__amount,
+  .category-item__play-again {
+    display: none;
+  }
+}
+
+.hidden {
+  transform: scale(10);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.gray {
+  filter: grayscale(1);
+}
+
+.none {
+  display: none;
+}

@@ -1,7 +1,6 @@
 import RSSlogo from '../../images/icon/main/logo-rs_school.svg';
 
 const Footer = {
-  
   render() {
     return `
     <footer class="footer container">
@@ -15,7 +14,7 @@ const Footer = {
 
       <time class="footer__date">2022</time>
     </footer>`;
-  }
-}
+  },
+};
 
 export default Footer;

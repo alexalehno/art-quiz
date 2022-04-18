@@ -1,6 +1,6 @@
-
 class GameC {
   gModel = null;
+
   gField = null;
 
   start(model, field) {
@@ -32,10 +32,15 @@ class GameC {
   }
 
   saveValue = (e) => this.gModel.saveValue(e);
+
   setTime = (e) => this.gModel.setTime(e);
+
   setCheckbox = (e) => this.gModel.setCheckbox(e);
+
   setVolume = (e) => this.gModel.setVolume(e);
+
   switchPage = (e) => this.gModel.switchPage(e);
+
   showScoreInfo = (e) => this.gModel.showScoreInfo(e);
 }
 

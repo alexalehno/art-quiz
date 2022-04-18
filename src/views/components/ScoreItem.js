@@ -1,9 +1,7 @@
- 
- 
 const ScoreItem = {
   render() {
     return `
-    <li class="score__item none">
+    <li class="score__item">
       <h4 class="score__item-title"></h4>
       <div class="score__item-bg">
         <div class="score__item-content">
@@ -15,7 +13,7 @@ const ScoreItem = {
         </div>
       </div>
     </li>`;
-  }
-}
+  },
+};
 
 export default ScoreItem;

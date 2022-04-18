@@ -38,7 +38,7 @@ button {
   color: white;
   background-color: black;
   box-shadow: 0px 0px 100px 0px rgb(255 0 0);
-  // overflow: hidden;
+  overflow: hidden;
 }
 
 .container {
@@ -64,83 +64,3 @@ button {
   font-size: 22px;
   letter-spacing: -0.5px;
 }
-
-.opacity {
-  opacity: 35%;
-}
-
-// ...................................
-
-.hover-opacity {
-  transition: vars.$transition;
-
-  &:hover {
-    opacity: vars.$opacity;
-  }
-}
-
-.hover-bg {
-  transition: vars.$transition;
-
-  &:hover {
-    background-color: white;
-    color: black;
-  }
-
-  &:active {
-    border-color: #FFBCA2;
-    background-color: #FFBCA2;
-    color: black;
-  }
-}
-
-.hover-rotate {
-  transition: vars.$transition;
-
-  &:hover {
-    transform: rotate(-360deg);
-  }
-}
-
-// ...............................
-
-.not-played {
-  filter: grayscale(100%);
-
-  & .category-item__amount,
-  .category-item__play-again {
-    display: none;
-  }
-}
-
-.hidden {
-  transform: scale(10);
-  opacity: 0;
-  visibility: hidden;
-}
-
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  @include vars.flex_center;
-
-  background-color: rgba(0, 0, 0, 0.6);
-  transition: calc(vars.$transition * 1.2);
-  transition-delay: 0.2s;
-}
-
-// ...........
-
-.gray {
-  filter: grayscale(1);
-}
-
-.none {
-  display: none;
-}
-
-

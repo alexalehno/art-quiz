@@ -1,10 +1,8 @@
-import Footer from '../components/Footer.js';
-import SettingBtn from '../components/header/SettingBtn.js';
-import Logo from '../components/header/Logo.js';
-import Nav from '../components/header/Nav.js';
-
+import Footer from '../components/Footer';
+import SettingBtn from '../components/header/SettingBtn';
+import Logo from '../components/header/Logo';
+import Nav from '../components/header/Nav';
 import ScoreItem from '../components/ScoreItem';
-
 
 function createItem() {
   let str = '';
@@ -12,14 +10,13 @@ function createItem() {
   for (let i = 0; i < 10; i++) {
     str += ScoreItem.render();
   }
+
   return str;
 }
 
-
 const Score = {
   render(request) {
-
-    let type = request.resource.split('_')[1];
+    const type = request.resource.split('_')[1];
 
     return `
     <div class="score-page page">
@@ -33,7 +30,7 @@ const Score = {
         <h2 class="score__title">${type} quiz</h2>
         <div class="score-content">
           <p class="score__sub-title">Score Page</p>
-          <ul class="score__list">${createItem()}</ul>
+          <ul class="score__list none">${createItem()}</ul>
         </div>
 
         <div class="score-btns score-btns--margin"> 
@@ -49,7 +46,7 @@ const Score = {
 
       ${Footer.render()}
     </div>`;
-  }
-}
+  },
+};
 
 export default Score;

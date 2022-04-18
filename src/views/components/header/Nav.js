@@ -1,6 +1,4 @@
-import { storage } from '../../../app.js';
-import { importAll } from '../../../services/funcs.js';
-
+import { importAll } from '../../../services/funcs';
 
 const navIcons = [];
 
@@ -17,14 +15,12 @@ const Nav = {
             Home
           </a>
         </li>
-        
         <li class="nav__item">
-          <a class="nav__link ${cls[0]}" href="/#/${storage.questionType}">
+          <a class="nav__link ${cls[0]}" href="/#/${request.resource}">
             <img class="nav__icon" src="${navIcons[1]}" alt="icon">
             Categories
           </a>
         </li>
-        
         <li class="nav__item">
           <a class="nav__link ${cls[1]}" href="/#/${request.resource}/score">
             <img class="nav__icon" src="${navIcons[2]}" alt="icon">
@@ -33,7 +29,7 @@ const Nav = {
         </li>
       </ul>
     </nav>`;
-  }
-}
+  },
+};
 
 export default Nav;

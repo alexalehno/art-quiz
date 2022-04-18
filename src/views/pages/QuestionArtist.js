@@ -1,15 +1,12 @@
-import Footer from '../components/Footer.js';
+import Footer from '../components/Footer';
 import CloseBtn from '../components/header/CloseBtn';
-
-import TimeIndicator from '../components/question/TimeIndicator.js';
-import QuestionsIndicator from '../components/question/QuestionsIndicator.js';
-
-import QuestionResult from '../components/results/QuestionResult.js';
-import CategoryResult from '../components/results/CategoryResult.js';
-import CategoryGrandRes from '../components/results/CategoryGrandRes.js';
-import CategoryGameOver from '../components/results/CategoryGameOver.js';
-
-import QuitGame from '../components/results/QuitGame.js';
+import TimeIndicator from '../components/question/TimeIndicator';
+import QuestionsIndicator from '../components/question/QuestionsIndicator';
+import QuestionResult from '../components/results/QuestionResult';
+import CategoryResult from '../components/results/CategoryResult';
+import CategoryGrandRes from '../components/results/CategoryGrandRes';
+import CategoryGameOver from '../components/results/CategoryGameOver';
+import QuitGame from '../components/results/QuitGame';
 
 const QuestionArtist = {
   render(request) {
@@ -34,17 +31,15 @@ const QuestionArtist = {
         </div>
         
         ${QuestionResult.render()}
-        
         ${CategoryGameOver.render(request)}
         ${CategoryResult.render(request)}
         ${CategoryGrandRes.render(request)}
-
         ${QuitGame.render(request)}
       </main>
 
       ${Footer.render()}
     </div>`;
-  }
-}
+  },
+};
 
 export default QuestionArtist;

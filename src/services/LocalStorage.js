@@ -1,12 +1,20 @@
 class LocalStorage {
+  constructor(locStore) {
+    this.localStorage = locStore;
+  }
+
   getData(name) {
-    if (localStorage.getItem(name)) {
-      return JSON.parse(localStorage.getItem(name));
+    let data;
+
+    if (this.localStorage.getItem(name)) {
+      data = JSON.parse(this.localStorage.getItem(name));
     }
+
+    return data;
   }
 
   setData(name, data) {
-    localStorage.setItem(name, JSON.stringify(data));
+    this.localStorage.setItem(name, JSON.stringify(data));
   }
 }
 

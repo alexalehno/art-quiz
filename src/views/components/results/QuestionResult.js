@@ -1,4 +1,3 @@
-
 const QuestionResult = {
   render() {
     return `
@@ -14,7 +13,7 @@ const QuestionResult = {
       </div>
     </div>
     `;
-  }
-}
+  },
+};
 
 export default QuestionResult;

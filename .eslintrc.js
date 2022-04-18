@@ -11,6 +11,6 @@ module.exports = {
   },
   "rules": {
     "no-plusplus": "off",
-    "max-len": ["error", 101]
+    "max-len": ["error", 145]
   },
 };

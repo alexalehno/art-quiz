@@ -5,9 +5,8 @@ const Logo = {
     return `
     <a class="header__logo" href="/#/">
       <img class="header__logo-img" src="${icon}" alt="logo-category">
-    </a>
-    `;
-  }
-}
+    </a>`;
+  },
+};
 
 export default Logo;

@@ -1,7 +1,4 @@
 @use 'general/fonts';
-
-@use 'components/results-windows';
-
 @use 'general/general';
 
 @use 'components/set-btn';
@@ -9,6 +6,7 @@
 @use 'components/questions-indicator';
 @use 'components/nav';
 @use 'components/footer';
+@use 'components/results-windows';
 
 @use 'pages/error-page';
 @use 'pages/main-page';
@@ -17,5 +15,7 @@
 @use 'pages/score-page';
 @use 'pages/question-artist';
 @use 'pages/question-pictures';
+
+@use 'general/classes';
 
 @use 'general/media-query';
