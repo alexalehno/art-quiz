@@ -30,7 +30,8 @@ button {
   flex-direction: column;
   justify-content: space-between;
   max-width: 1440px;
-  min-height: 640px;
+  // min-height: 640px;
+  min-height: 100vh;
   padding-top: 22px;
   padding-bottom: 10px;
   box-sizing: border-box;
